@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ananda Sandhya 2026 — Bengali Association of Pittsburgh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --maroon:      #7a1c2e;
+    --maroon-dark: #4e0f1c;
+    --maroon-light:#c04a5a;
+    --green:       #1d5c3a;
+    --green-light: #2e7d52;
+    --cream:       #fdf6ec;
+    --gold:        #c9973a;
+    --gold-light:  #e8c070;
+    --text:        #2a1a10;
+    --text-muted:  #6b4c38;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── DECORATIVE BORDER STRIP ── */
+  .border-strip {
+    height: 8px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--maroon) 0 12px,
+      var(--gold) 12px 24px,
+      var(--green) 24px 36px,
+      var(--gold) 36px 48px
+    );
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--maroon-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  nav .nav-brand {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-light);
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+  }
+  nav ul a {
+    color: #e8d8c8;
+    text-decoration: none;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--gold-light); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 64px 32px 80px;
+    position: relative;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(29,92,58,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(122,28,46,0.07) 0%, transparent 60%),
+      var(--cream);
+    overflow: hidden;
+  }
+
+  /* ornamental corner flourishes */
+  #hero::before, #hero::after {
+    content: '';
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background-image:
+      radial-gradient(circle 2px at center, var(--gold) 100%, transparent),
+      repeating-conic-gradient(from 0deg, var(--gold) 0deg 2deg, transparent 2deg 30deg);
+    opacity: 0.18;
+    border-radius: 50%;
+  }
+  #hero::before { top: -60px; left: -60px; }
+  #hero::after  { bottom: -60px; right: -60px; }
+
+  .hero-logo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    padding: 8px;
+    background: white;
+    box-shadow: 0 4px 32px rgba(122,28,46,0.15);
+    object-fit: contain;
+    margin-bottom: 32px;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .hero-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+    animation: fadeUp 0.9s 0.15s ease both;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 300;
+    color: var(--maroon-dark);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    animation: fadeUp 0.9s 0.3s ease both;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--green);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: 16px;
+    letter-spacing: 0.04em;
+    animation: fadeUp 0.9s 0.45s ease both;
+  }
+
+  .hero-divider {
+    margin: 28px auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeUp 0.9s 0.55s ease both;
+  }
+  .hero-divider span { font-size: 1.4rem; color: var(--gold); }
+  .hero-divider::before, .hero-divider::after {
+    content: '';
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  .hero-date {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--maroon);
+    letter-spacing: 0.12em;
+    animation: fadeUp 0.9s 0.65s ease both;
+  }
+
+  .hero-venue {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-top: 6px;
+    animation: fadeUp 0.9s 0.75s ease both;
+  }
+
+  .hero-cta {
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.9s 0.85s ease both;
+  }
+  .btn {
+    padding: 14px 36px;
+    border-radius: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--maroon);
+    color: var(--gold-light);
+    box-shadow: 0 4px 20px rgba(122,28,46,0.3);
+  }
+  .btn-primary:hover { background: var(--maroon-dark); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--green);
+    border: 1.5px solid var(--green);
+  }
+  .btn-outline:hover { background: var(--green); color: white; transform: translateY(-2px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 0; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .section-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .section-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--maroon-dark);
+    line-height: 1.15;
+  }
+  .section-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .section-rule::before, .section-rule::after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.7;
+  }
+  .section-rule span { color: var(--gold); font-size: 1rem; }
+
+  /* ── ABOUT ── */
+  #about { background: white; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .about-text p {
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    font-size: 1.05rem;
+  }
+  .about-text p:first-child {
+    font-size: 1.2rem;
+    color: var(--text);
+    font-style: italic;
+  }
+  .about-image-placeholder {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--green) 100%);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.3);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-image-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+  }
+
+  /* ── PROGRAM ── */
+  #program { background: var(--cream); }
+  .program-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'EB Garamond', serif;
+  }
+  .program-table thead tr {
+    background: var(--maroon-dark);
+    color: var(--gold-light);
+  }
+  .program-table thead th {
+    padding: 14px 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-align: left;
+    font-weight: 400;
+  }
+  .program-table tbody tr {
+    border-bottom: 1px solid rgba(122,28,46,0.1);
+    transition: background 0.15s;
+  }
+  .program-table tbody tr:hover { background: rgba(122,28,46,0.04); }
+  .program-table tbody td {
+    padding: 14px 20px;
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+  .program-table tbody td:first-child {
+    color: var(--maroon);
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    width: 80px;
+  }
+  .program-table tbody td:nth-child(2) {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 1.05rem;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em;
+  }
+  .badge-mc   { background: rgba(122,28,46,0.1);  color: var(--maroon); }
+  .badge-quiz { background: rgba(29,92,58,0.1);   color: var(--green); }
+
+  /* ── VIDEOS ── */
+  #videos { background: var(--maroon-dark); }
+  #videos .section-header h2 { color: var(--gold-light); }
+  #videos .section-tag { color: var(--gold); }
+  #videos .section-rule::before,
+  #videos .section-rule::after { background: var(--gold); opacity: 0.4; }
+  #videos .section-rule span { color: var(--gold); }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .video-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .video-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .video-thumb {
+    aspect-ratio: 16/9;
+    background: rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+  }
+  .video-thumb .play-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(201,151,58,0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+    transition: transform 0.2s;
+  }
+  .video-thumb:hover .play-btn { transform: scale(1.1); }
+  .video-thumb-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 12px;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    font-family: 'Cinzel', serif;
+  }
+  .video-info {
+    padding: 18px;
+  }
+  .video-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold-light);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .video-info p {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* ── GALLERY ── */
+  #gallery { background: white; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
+    gap: 12px;
+  }
+  .gallery-item {
+    background: linear-gradient(135deg, rgba(122,28,46,0.12), rgba(29,92,58,0.12));
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.1em;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+  }
+  .gallery-item:hover { opacity: 0.85; }
+  .gallery-item.tall { grid-row: span 2; }
+  .gallery-item.wide { grid-column: span 2; }
+
+  /* ── SPONSORS ── */
+  #sponsors { background: var(--cream); }
+  .sponsor-tiers { display: flex; flex-direction: column; gap: 48px; }
+  .sponsor-tier-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .sponsor-tier-label.gold-tier   { color: var(--gold); }
+  .sponsor-tier-label.silver-tier { color: #aaa; }
+  .sponsor-tier-label.bronze-tier { color: #c07040; }
+  .sponsor-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .sponsor-box {
+    width: 180px;
+    height: 90px;
+    border: 1.5px dashed rgba(122,28,46,0.2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(122,28,46,0.25);
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    transition: border-color 0.2s;
+  }
+  .sponsor-box:hover { border-color: var(--gold); }
+  .sponsor-box.large { width: 240px; height: 110px; }
+
+  /* ── COMMITTEE ── */
+  #committee { background: white; }
+  .committee-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+  }
+  .committee-card {
+    text-align: center;
+    padding: 28px 20px;
+    border: 1px solid rgba(122,28,46,0.1);
+    border-radius: 4px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .committee-card:hover { box-shadow: 0 8px 32px rgba(122,28,46,0.1); transform: translateY(-2px); }
+  .committee-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--maroon), var(--green));
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+  .committee-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--maroon-dark);
+    margin-bottom: 4px;
+  }
+  .committee-card p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--maroon-dark); }
+  #contact .section-header h2 { color: var(--gold-light); }
+  #contact .section-tag { color: var(--gold); }
+  #contact .section-rule::before,
+  #contact .section-rule::after { background: var(--gold); opacity: 0.4; }
+  #contact .section-rule span { color: var(--gold); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .contact-info p {
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
+  .contact-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,151,58,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+  .contact-detail-text strong {
+    display: block;
+    color: var(--gold-light);
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 2px;
+  }
+  .contact-detail-text span {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.95rem;
+  }
+  .contact-form-placeholder {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    padding: 32px;
+    text-align: center;
+    color: rgba(255,255,255,0.2);
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+  .contact-form-placeholder .fi { font-size: 2rem; opacity: 0.3; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #1a0a10;
+    padding: 40px 40px 24px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--gold-light);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .footer-sub {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .footer-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 24px auto; max-width: 400px; }
+  .footer-copy {
+    color: rgba(255,255,255,0.2);
+    font-size: 0.8rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    nav ul { gap: 18px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .video-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 24px; }
+  }
+  @media (max-width: 600px) {
+    nav ul { display: none; }
+    .video-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    h1 { font-size: 2.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="border-strip"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#hero">BAP · Ananda Sandhya</a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#videos">Performances</a></li>
+    <li><a href="#sponsors">Sponsors</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <img class="hero-logo" src="https://via.placeholder.com/160x160/ffffff/ffffff?text=+" alt="BAP Logo — replace with actual logo" style="border:3px solid #c9973a; border-radius:50%; background:white;" />
+  <!-- Replace the img above src with your actual BAP logo path, e.g. src="bap-logo.png" -->
+
+  <div class="hero-tag">Bengali Association of Pittsburgh</div>
+
+  <h1>Ananda<br /><em>Sandhya</em></h1>
+
+  <p class="hero-subtitle">An Evening of Community, Culture &amp; Celebration</p>
+
+  <div class="hero-divider"><span>✦</span></div>
+
+  <p class="hero-date">— Date &amp; Time TBD —</p>
+  <p class="hero-venue">Venue Name · Pittsburgh, PA</p>
+
+  <div class="hero-cta">
+    <a href="#program" class="btn btn-primary">View Program</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">About the Event</span>
+      <h2>A Night to Remember</h2>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Ananda Sandhya is one of the most cherished annual events of the Bengali Association of Pittsburgh — a joyful evening woven together with music, dance, drama, and the warmth of community.</p>
+        <p><!-- Add your event description here. Talk about the theme, what attendees can expect, the spirit of the evening, etc. --></p>
+        <p><!-- Additional paragraph about BAP's history, mission, or this year's highlights. --></p>
+        <p style="margin-top:24px;">
+          <a href="#program" class="btn btn-outline" style="display:inline-block;">See the Full Program →</a>
+        </p>
+      </div>
+      <div class="about-image-placeholder">
+        <!-- Replace this div with an <img> tag pointing to your event photo -->
+        Add Event Photo Here
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM ORDER -->
+<section id="program">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Schedule</span>
+      <h2>Program Order</h2>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <table class="program-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Performance / Segment</th>
+          <th>Duration</th>
+          <th>Buffer</th>
+          <th>Type</th>
+          <th>Host / Coordinator</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>Speech / MC Opening</td>
+          <td>8 min</td>
+          <td>—</td>
+          <td><span class="badge badge-mc">MC</span></td>
+          <td>Dipanwita / Debolina</td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>BAP Opening Song</td>
+          <td>5 min</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Instrument</td>
+          <td>10 min</td>
+          <td>—</td>
+          <td><span class="badge badge-mc">MC</span></td>
+          <td>Arpita / Chaitali</td>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Singing</td>
+          <td>40 min</td>
+          <td>15 min</td>
+          <td><span class="badge badge-mc">MC</span></td>
+          <td>Dipanwita / Debolina</td>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Natok &amp; Prize Distribution</td>
+          <td>60 min</td>
+          <td>15 min</td>
+          <td><span class="badge badge-quiz">Quiz</span></td>
+          <td>Gobindo</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Dance</td>
+          <td>30 min</td>
+          <td>—</td>
+          <td><span class="badge badge-mc">MC</span></td>
+          <td>Dipanwita / Debolina</td>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Prize Distribution</td>
+          <td>15 min</td>
+          <td>15 min</td>
+          <td><span class="badge badge-mc">MC</span></td>
+          <td>Arpita / Chaitali</td>
+        </tr>
+        <tr style="background:rgba(122,28,46,0.04); font-weight:600;">
+          <td></td>
+          <td style="color:var(--maroon-dark); font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.08em;">Total</td>
+          <td style="color:var(--maroon);">168 min</td>
+          <td style="color:var(--maroon);">45 min</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr style="background:rgba(122,28,46,0.06);">
+          <td></td>
+          <td style="color:var(--text-muted); font-style:italic;">Subtotal (Final)</td>
+          <td></td>
+          <td style="color:var(--maroon); font-weight:600;">213 min</td>
+          <td></td><td></td>
+        </tr>
+        <tr style="background:rgba(122,28,46,0.03);">
+          <td></td>
+          <td style="color:var(--text-muted); font-style:italic;">Buffer</td>
+          <td></td>
+          <td>30 min</td>
+          <td></td><td></td>
+        </tr>
+        <tr style="background:rgba(29,92,58,0.06);">
+          <td></td>
+          <td style="color:var(--green); font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.08em;">Allowed</td>
+          <td></td>
+          <td style="color:var(--green); font-weight:700;">240 min</td>
+          <td></td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- VIDEOS / PERFORMANCES -->
+<section id="videos">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">On Stage</span>
+      <h2>Performances &amp; Highlights</h2>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="video-grid">
+      <!-- Video Card 1 -->
+      <div class="video-card">
+        <div class="video-thumb">
+          <!-- Replace with: <iframe width="100%" height="100%" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe> -->
+          <div class="play-btn">▶</div>
+          <div class="video-thumb-label">Video Coming Soon</div>
+        </div>
+        <div class="video-info">
+          <h3>Performance Title</h3>
+          <p>Description of this performance — artist name, category, a brief note about the act.</p>
+        </div>
+      </div>
+      <!-- Video Card 2 -->
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="play-btn">▶</div>
+          <div class="video-thumb-label">Video Coming Soon</div>
+        </div>
+        <div class="video-info">
+          <h3>Performance Title</h3>
+          <p>Description of this performance — artist name, category, a brief note about the act.</p>
+        </div>
+      </div>
+      <!-- Video Card 3 -->
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="play-btn">▶</div>
+          <div class="video-thumb-label">Video Coming Soon</div>
+        </div>
+        <div class="video-info">
+          <h3>Performance Title</h3>
+          <p>Description of this performance — artist name, category, a brief note about the act.</p>
+        </div>
+      </div>
+      <!-- Video Card 4 -->
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="play-btn">▶</div>
+          <div class="video-thumb-label">Video Coming Soon</div>
+        </div>
+        <div class="video-info">
+          <h3>Performance Title</h3>
+          <p>Description of this performance — artist name, category, a brief note about the act.</p>
+        </div>
+      </div>
+      <!-- Video Card 5 -->
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="play-btn">▶</div>
+          <div class="video-thumb-label">Video Coming Soon</div>
+        </div>
+        <div class="video-info">
+          <h3>Performance Title</h3>
+          <p>Description of this performance — artist name, category, a brief note about the act.</p>
+        </div>
+      </div>
+      <!-- Video Card 6 -->
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="play-btn">▶</div>
+          <div class="video-thumb-label">Video Coming Soon</div>
+        </div>
+        <div class="video-info">
+          <h3>Performance Title</h3>
+          <p>Description of this performance — artist name, category, a brief note about the act.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Memories</span>
+      <h2>Photo Gallery</h2>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="gallery-grid">
+      <!-- Replace each div with <img src="your-photo.jpg" alt="..." style="width:100%;height:100%;object-fit:cover;"> -->
+      <div class="gallery-item wide tall">Photo 1</div>
+      <div class="gallery-item">Photo 2</div>
+      <div class="gallery-item">Photo 3</div>
+      <div class="gallery-item">Photo 4</div>
+      <div class="gallery-item">Photo 5</div>
+      <div class="gallery-item wide">Photo 6</div>
+      <div class="gallery-item">Photo 7</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSORS -->
+<section id="sponsors">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Our Supporters</span>
+      <h2>Sponsors &amp; Partners</h2>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="sponsor-tiers">
+
+      <!-- Gold Sponsors -->
+      <div>
+        <div class="sponsor-tier-label gold-tier">✦ Gold Sponsors ✦</div>
+        <div class="sponsor-row">
+          <div class="sponsor-box large">Sponsor Logo</div>
+          <div class="sponsor-box large">Sponsor Logo</div>
+          <div class="sponsor-box large">Sponsor Logo</div>
+        </div>
+      </div>
+
+      <!-- Silver Sponsors -->
+      <div>
+        <div class="sponsor-tier-label silver-tier">— Silver Sponsors —</div>
+        <div class="sponsor-row">
+          <div class="sponsor-box">Sponsor Logo</div>
+          <div class="sponsor-box">Sponsor Logo</div>
+          <div class="sponsor-box">Sponsor Logo</div>
+          <div class="sponsor-box">Sponsor Logo</div>
+        </div>
+      </div>
+
+      <!-- Community Partners -->
+      <div>
+        <div class="sponsor-tier-label bronze-tier">· Community Partners ·</div>
+        <div class="sponsor-row">
+          <div class="sponsor-box">Partner Logo</div>
+          <div class="sponsor-box">Partner Logo</div>
+          <div class="sponsor-box">Partner Logo</div>
+          <div class="sponsor-box">Partner Logo</div>
+          <div class="sponsor-box">Partner Logo</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ORGANIZING COMMITTEE -->
+<section id="committee">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">The Team</span>
+      <h2>Organizing Committee</h2>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="committee-grid">
+      <!-- Duplicate / edit these cards as needed -->
+      <div class="committee-card">
+        <div class="committee-avatar">A</div>
+        <h3>Name Here</h3>
+        <p>Role / Title</p>
+      </div>
+      <div class="committee-card">
+        <div class="committee-avatar">B</div>
+        <h3>Name Here</h3>
+        <p>Role / Title</p>
+      </div>
+      <div class="committee-card">
+        <div class="committee-avatar">C</div>
+        <h3>Name Here</h3>
+        <p>Role / Title</p>
+      </div>
+      <div class="committee-card">
+        <div class="committee-avatar">D</div>
+        <h3>Name Here</h3>
+        <p>Role / Title</p>
+      </div>
+      <div class="committee-card">
+        <div class="committee-avatar">E</div>
+        <h3>Name Here</h3>
+        <p>Role / Title</p>
+      </div>
+      <div class="committee-card">
+        <div class="committee-avatar">F</div>
+        <h3>Name Here</h3>
+        <p>Role / Title</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Reach Us</span>
+      <h2>Contact &amp; Information</h2>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>Have questions about Ananda Sandhya, sponsorship, or performances? We'd love to hear from you.</p>
+        <div class="contact-detail">
+          <div class="contact-icon">✉</div>
+          <div class="contact-detail-text">
+            <strong>Email</strong>
+            <span><!-- your@email.com --></span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📍</div>
+          <div class="contact-detail-text">
+            <strong>Venue</strong>
+            <span><!-- Venue Name, Address, Pittsburgh PA --></span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">🌐</div>
+          <div class="contact-detail-text">
+            <strong>Website</strong>
+            <span><!-- www.bapittsburgh.org --></span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📱</div>
+          <div class="contact-detail-text">
+            <strong>Social Media</strong>
+            <span><!-- @BAPittsburgh --></span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-placeholder">
+        <div class="fi">✉</div>
+        <div>RSVP / Contact Form<br /><span style="opacity:.4;font-size:.7rem;">— Add form here —</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ananda Sandhya</div>
+  <div class="footer-sub">Bengali Association of Pittsburgh · Est. 1981</div>
+  <div style="color:rgba(255,255,255,0.25);font-size:0.9rem;margin-bottom:8px;">Community &nbsp;✦&nbsp; Culture &nbsp;✦&nbsp; Celebration</div>
+  <div class="footer-divider"></div>
+  <div class="footer-copy">© 2026 Bengali Association of Pittsburgh. All rights reserved.</div>
+</footer>
+
+<div class="border-strip"></div>
+
+</body>
+</html>
