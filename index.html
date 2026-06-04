@@ -301,8 +301,96 @@
 
   /* DECO */
   .about-deco-row{display:flex;justify-content:center;gap:40px;margin-top:48px;flex-wrap:wrap;}
-  .deco-icon{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+
+  /* ── ILLUSTRATION ANIMATIONS ── */
+  @keyframes flameDance{0%,100%{d:path("M50,72 C46,62 40,52 42,40 C44,30 50,26 50,26 C50,26 56,30 58,40 C60,52 54,62 50,72Z")}25%{d:path("M50,72 C47,61 42,50 43,39 C45,28 51,25 50,25 C50,25 55,29 57,40 C59,53 53,62 50,72Z")}75%{d:path("M50,72 C45,63 41,51 44,40 C46,30 50,27 50,27 C50,27 57,31 58,41 C60,51 54,63 50,72Z")}}
+  @keyframes flameFlicker{0%,100%{opacity:1;transform:scaleX(1) scaleY(1)}20%{opacity:.88;transform:scaleX(.93) scaleY(1.04)}50%{opacity:.95;transform:scaleX(1.05) scaleY(.97)}80%{opacity:.9;transform:scaleX(.96) scaleY(1.03)}}
+  @keyframes flamePulse{0%,100%{opacity:.8;transform:scale(1) translateY(0)}30%{opacity:.6;transform:scale(.92) translateY(1px)}60%{opacity:.9;transform:scale(1.06) translateY(-1px)}}
+  @keyframes reelSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  @keyframes reelSpinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  @keyframes stringVibrate{0%,100%{transform:translateY(0) scaleY(1)}25%{transform:translateY(-1px) scaleY(.998)}50%{transform:translateY(0) scaleY(1.002)}75%{transform:translateY(1px) scaleY(.998)}}
+  @keyframes tablaRipple{0%,100%{r:4}50%{r:5.5}}
+  @keyframes illoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  @keyframes lotusBloom{0%{opacity:0;transform:scale(.4) rotate(-30deg)}100%{opacity:1;transform:scale(1) rotate(0deg)}}
+  @keyframes shadowPulse{0%,100%{opacity:.18;transform:scaleX(1)}50%{opacity:.1;transform:scaleX(.85)}}
+  @keyframes glintSweep{0%,80%,100%{opacity:0}40%{opacity:.7}}
+  @keyframes noteRise{0%{opacity:0;transform:translateY(0) scale(.8)}30%{opacity:.8}100%{opacity:0;transform:translateY(-18px) scale(1.1)}}
+
+  /* ── SCATTERED ILLUSTRATIONS ── */
+  .section-illo{display:flex;flex-direction:column;align-items:center;gap:0;}
+  .section-illo svg{filter:drop-shadow(0 8px 20px rgba(0,0,0,.22));transition:transform .4s cubic-bezier(.34,1.56,.64,1),filter .4s ease;}
+  .section-illo:hover svg{transform:translateY(-8px) scale(1.04);filter:drop-shadow(0 16px 32px rgba(201,151,58,.35));}
+  .illo-float-right{float:right;margin:0 0 28px 36px;clear:right;}
+  .illo-float-left{float:left;margin:0 36px 28px 0;clear:left;}
+  .illo-abs{position:absolute;pointer-events:none;opacity:.13;z-index:0;}
+  .illo-row{display:flex;align-items:flex-end;justify-content:center;gap:56px;flex-wrap:wrap;margin-top:48px;padding-top:36px;border-top:1px solid rgba(201,151,58,.12);}
+  .illo-row .section-illo{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.34,1.56,.64,1);}
+  .illo-row .section-illo.visible{opacity:1;transform:translateY(0);}
+  .program-illo-strip{display:flex;align-items:flex-end;justify-content:space-around;gap:24px;flex-wrap:wrap;margin-bottom:36px;}
+  .program-illo-strip .section-illo{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s cubic-bezier(.34,1.56,.64,1);}
+  .program-illo-strip .section-illo.visible{opacity:1;transform:translateY(0);}
+  #sponsorsIlloRow .section-illo{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.34,1.56,.64,1);}
+  #sponsorsIlloRow .section-illo.visible{opacity:1;transform:translateY(0);}
+  @media(max-width:768px){
+    .illo-float-right,.illo-float-left{float:none;margin:20px auto;display:block;}
+    .illo-row{gap:24px;}
+    .gallery-prodip-flanks{display:none;}
+    /* Scale illustrations in rows */
+    .illo-row .section-illo svg{max-width:100%;height:auto;}
+    /* Tighten the about illo row on tablet */
+    #aboutIlloRow .section-illo:nth-child(2) svg{width:160px;height:192px;}
+    #aboutIlloRow .section-illo:nth-child(1) svg{width:100px;height:auto;}
+    #aboutIlloRow .section-illo:nth-child(3) svg{width:80px;height:auto;}
+  }
+
+  @media(max-width:600px){
+    /* ── ILLUSTRATION ROWS ── */
+    .illo-row{gap:16px;margin-top:28px;padding-top:20px;}
+    /* About: hide tabla + bansuri, show only the dancer centered */
+    #aboutIlloRow .section-illo:nth-child(1),
+    #aboutIlloRow .section-illo:nth-child(3){display:none;}
+    #aboutIlloRow .section-illo:nth-child(2){width:100%;}
+    #aboutIlloRow .section-illo:nth-child(2) svg{width:180px;height:216px;}
+    /* Cinema illo row: hide on small screens */
+    #cinemaIlloRow{display:none;}
+    /* Videos illo row: compact scroll */
+    #videosIlloRow{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;justify-content:flex-start;padding:0 20px 12px;gap:20px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    #videosIlloRow::-webkit-scrollbar{display:none;}
+    #videosIlloRow .section-illo{flex-shrink:0;}
+    /* Program illo strip: horizontal scroll, no wrap */
+    .program-illo-strip{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;justify-content:flex-start;padding:0 20px 12px;gap:16px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    .program-illo-strip::-webkit-scrollbar{display:none;}
+    .program-illo-strip .section-illo{flex-shrink:0;}
+    /* Sponsors illo row: tighten and scale */
+    #sponsorsIlloRow{gap:20px;margin-bottom:28px;}
+    #sponsorsIlloRow .section-illo svg{width:36px;height:auto;}
+    #sponsorsIlloRow .section-illo:nth-child(2) svg{width:80px;height:80px;}
+    /* ── GALLERY PRODIP FLANKS ── */
+    /* Hide the flanking prodip lamps on mobile — upload zone gets full width */
+    [id="uploadZone"]{margin:0!important;}
+    .gallery-upload-flanks .section-illo{display:none;}
+    /* The inline flex row wrapping the upload zone + prodips */
+    #photo-gallery [style*="display:flex"][style*="align-items:center"]{flex-direction:column;gap:0;}
+    #photo-gallery [style*="display:flex"][style*="align-items:center"] .section-illo{display:none;}
+    /* ── ABOUT FLOAT ILLO ── */
+    .illo-float-right,.illo-float-left{float:none;margin:0 auto 24px;display:flex;justify-content:center;}
+    .illo-float-right svg,.illo-float-left svg{width:80px;height:auto;}
+    /* ── PHOTO MASONRY ── */
+    .photo-masonry{columns:2;column-gap:8px;}
+    .photo-item{margin-bottom:8px;}
+    /* ── LIGHTBOX ── */
+    .lightbox-caption{font-size:.6rem;bottom:-32px;}
+  }
+
+  @media(max-width:400px){
+    #aboutIlloRow .section-illo:nth-child(2) svg{width:150px;height:180px;}
+    #videosIlloRow{padding:0 16px 10px;gap:16px;}
+    .program-illo-strip{padding:0 16px 10px;gap:14px;}
+  }
+  .deco-icon{display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
   .deco-icon.visible{opacity:1;transform:translateY(0);}
+  .deco-icon svg{transition:transform .3s ease,filter .3s ease;filter:drop-shadow(0 4px 8px rgba(0,0,0,.15));}
+  .deco-icon:hover svg{transform:translateY(-6px) scale(1.08);filter:drop-shadow(0 8px 16px rgba(201,151,58,.3));}
   .deco-icon-label{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.2em;color:var(--text-muted);text-transform:uppercase;}
 
   .bioscope-corner{position:absolute;bottom:24px;right:24px;opacity:.12;pointer-events:none;z-index:0;animation:bioPulse 4s ease-in-out infinite;}
@@ -315,6 +403,8 @@
   .instrument-band::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(201,151,58,.03) 0,rgba(201,151,58,.03) 1px,transparent 1px,transparent 60px);}
   .instr-item{display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transform:scale(.85);transition:opacity .6s ease,transform .6s ease;position:relative;z-index:1;}
   .instr-item.visible{opacity:1;transform:scale(1);}
+  .instr-item svg{transition:transform .3s ease,filter .3s ease;filter:drop-shadow(0 4px 8px rgba(0,0,0,.3));}
+  .instr-item:hover svg{transform:translateY(-6px) scale(1.1);filter:drop-shadow(0 8px 20px rgba(201,151,58,.35));}
   .instr-label{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;color:rgba(201,151,58,.5);text-transform:uppercase;}
 
   /* FOOTER */
@@ -1115,6 +1205,57 @@
     </div>
     <div class="about-grid">
       <div class="about-text reveal-left">
+        <!-- PRODIP — richly detailed animated oil lamp -->
+        <div class="section-illo illo-float-right reveal">
+          <svg width="100" height="130" viewBox="0 0 80 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="haloA" cx="50%" cy="70%" r="55%"><stop offset="0%" stop-color="#ffe580" stop-opacity=".7"/><stop offset="55%" stop-color="#f59e0b" stop-opacity=".25"/><stop offset="100%" stop-color="#e85d04" stop-opacity="0"/></radialGradient>
+              <radialGradient id="bowlA" cx="38%" cy="30%" r="70%"><stop offset="0%" stop-color="#f0c040"/><stop offset="45%" stop-color="#c9973a"/><stop offset="100%" stop-color="#7a4a10"/></radialGradient>
+              <radialGradient id="bowlInnerA" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2a1005" stop-opacity=".9"/><stop offset="100%" stop-color="#1a0803"/></radialGradient>
+              <linearGradient id="stemA" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#b8820e"/><stop offset="40%" stop-color="#e8b840"/><stop offset="100%" stop-color="#8b5e1a"/></linearGradient>
+              <radialGradient id="baseA" cx="40%" cy="30%" r="65%"><stop offset="0%" stop-color="#dda030"/><stop offset="100%" stop-color="#7a4a10"/></radialGradient>
+              <filter id="glowA"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <!-- halo glow -->
+            <ellipse cx="40" cy="32" rx="26" ry="28" fill="url(#haloA)" style="animation:flameFlicker 2.2s ease-in-out infinite"/>
+            <!-- flame — outer yellow -->
+            <path d="M40,10 C36,17 31,24 33,32 C35,38 39,40 40,40 C41,40 45,38 47,32 C49,24 44,17 40,10Z" fill="#ffe566" style="animation:flameFlicker 1.8s ease-in-out infinite"/>
+            <!-- flame — mid orange -->
+            <path d="M40,14 C37,20 33,27 35,33 C37,37 40,38 40,38 C40,38 43,37 45,33 C47,27 43,20 40,14Z" fill="#ff9a30"/>
+            <!-- flame — inner white-hot core -->
+            <path d="M40,18 C38.5,23 37,28 38,32 C39,35 40,36 40,36 C40,36 41,35 42,32 C43,28 41.5,23 40,18Z" fill="#fff9d0"/>
+            <!-- wick -->
+            <line x1="40" y1="40" x2="40" y2="46" stroke="#4a2808" stroke-width="2" stroke-linecap="round"/>
+            <!-- oil bowl with rim detail -->
+            <path d="M24,46 Q23,41 40,41 Q57,41 56,46 L53,58 Q50,66 40,66 Q30,66 27,58 Z" fill="url(#bowlA)"/>
+            <!-- bowl highlight -->
+            <path d="M27,46 Q30,43 40,43 Q50,43 53,46" fill="none" stroke="rgba(255,248,200,.5)" stroke-width="1.2"/>
+            <!-- oil surface inside bowl -->
+            <ellipse cx="40" cy="52" rx="11" ry="5" fill="url(#bowlInnerA)"/>
+            <!-- oil sheen reflection -->
+            <ellipse cx="37" cy="51" rx="4" ry="2" fill="rgba(255,220,100,.08)"/>
+            <!-- spout -->
+            <path d="M52,50 Q62,46 64,40 Q61,39 56,43 Q54,46 52,50Z" fill="url(#bowlA)"/>
+            <path d="M53,48 Q60,45 62,41" fill="none" stroke="rgba(255,248,200,.3)" stroke-width=".8"/>
+            <!-- stem -->
+            <rect x="37" y="66" width="6" height="18" rx="3" fill="url(#stemA)"/>
+            <!-- stem collar -->
+            <rect x="34.5" y="64" width="11" height="4" rx="2" fill="#c9973a"/>
+            <rect x="35" y="64.5" width="10" height="2" rx="1" fill="#f0c040" opacity=".5"/>
+            <!-- base disc -->
+            <ellipse cx="40" cy="88" rx="20" ry="6" fill="url(#baseA)"/>
+            <!-- base highlight ring -->
+            <ellipse cx="40" cy="87" rx="17" ry="4.5" fill="none" stroke="rgba(255,240,150,.3)" stroke-width="1"/>
+            <!-- decorative dots on base -->
+            <circle cx="26" cy="87" r="1.8" fill="#f0c040" opacity=".8"/>
+            <circle cx="33" cy="88" r="1.5" fill="#f0c040" opacity=".6"/>
+            <circle cx="40" cy="88.5" r="2" fill="#f0c040" opacity=".9"/>
+            <circle cx="47" cy="88" r="1.5" fill="#f0c040" opacity=".6"/>
+            <circle cx="54" cy="87" r="1.8" fill="#f0c040" opacity=".8"/>
+            <!-- base shadow -->
+            <ellipse cx="40" cy="93" rx="16" ry="3" fill="rgba(0,0,0,.15)"/>
+          </svg>
+        </div>
         <p>Ananda Sandhya is one of the most cherished annual events of the Bengali Association of Pittsburgh — a joyful evening woven together with music, dance, drama, and the warmth of community.</p>
         <p>Join us for an unforgettable celebration of Bengali culture, featuring performances by talented community members spanning all ages. Come for the art, stay for the people.</p>
         <p>A beloved tradition since 1981, Ananda Sandhya brings together the Pittsburgh Bengali diaspora every year for an evening of laughter, music, and belonging.</p>
@@ -1122,74 +1263,517 @@
       </div>
       <div class="about-image-placeholder reveal-right">Add Event Photo Here</div>
     </div>
-    <div class="about-deco-row" id="aboutDecoRow">
+
+    <!-- About illo row: Tabla + Dancer anchor (large) + Bansuri -->
+    <div class="illo-row" id="aboutIlloRow">
+
+      <!-- TABLA PAIR — rich 3D with animated syahi ripple -->
+      <div class="section-illo">
+        <svg width="130" height="120" viewBox="0 0 110 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="tSkin1" cx="35%" cy="25%" r="70%"><stop offset="0%" stop-color="#f4e4c0"/><stop offset="40%" stop-color="#d4a860"/><stop offset="75%" stop-color="#9a6828"/><stop offset="100%" stop-color="#6a4010"/></radialGradient>
+            <radialGradient id="tSkin2" cx="35%" cy="25%" r="70%"><stop offset="0%" stop-color="#eedcb0"/><stop offset="40%" stop-color="#c89850"/><stop offset="75%" stop-color="#8a5820"/><stop offset="100%" stop-color="#5a3010"/></radialGradient>
+            <linearGradient id="tBody1" x1="0" y1="0" x2=".35" y2="1"><stop offset="0%" stop-color="#7a3010"/><stop offset="35%" stop-color="#521806"/><stop offset="100%" stop-color="#2c0a02"/></linearGradient>
+            <linearGradient id="tBody2" x1="0" y1="0" x2=".35" y2="1"><stop offset="0%" stop-color="#8a3c14"/><stop offset="35%" stop-color="#6a2408"/><stop offset="100%" stop-color="#361004"/></linearGradient>
+            <linearGradient id="tHighL" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(255,200,100,.28)"/><stop offset="100%" stop-color="rgba(255,200,100,0)"/></linearGradient>
+            <radialGradient id="tShadL" cx="50%" cy="90%" r="60%"><stop offset="0%" stop-color="rgba(0,0,0,.35)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/></radialGradient>
+          </defs>
+          <!-- BAYAN — large barrel drum, left -->
+          <!-- body — slightly tapered cylinder -->
+          <path d="M4,35 Q4,18 24,18 Q44,18 44,35 L42,80 Q42,92 24,92 Q6,92 6,80 Z" fill="url(#tBody1)"/>
+          <!-- inner shadow at base -->
+          <ellipse cx="24" cy="86" rx="18" ry="7" fill="url(#tShadL)"/>
+          <!-- body left highlight -->
+          <path d="M7,32 Q7,22 20,20 Q28,20 38,28" fill="url(#tHighL)" opacity=".9"/>
+          <!-- head membrane -->
+          <ellipse cx="24" cy="33" rx="20" ry="9" fill="url(#tSkin1)"/>
+          <!-- syahi (black tuning patch) -->
+          <ellipse cx="24" cy="33" rx="13" ry="5.8" fill="#180805" opacity=".9"/>
+          <ellipse cx="24" cy="33" rx="8" ry="3.5" fill="#0c0402" opacity=".95"/>
+          <!-- syahi concentric rings -->
+          <ellipse cx="24" cy="33" rx="11" ry="4.8" fill="none" stroke="rgba(80,40,10,.4)" stroke-width=".8"/>
+          <!-- membrane highlight -->
+          <ellipse cx="18" cy="28" rx="5" ry="2.2" fill="rgba(255,245,200,.15)"/>
+          <!-- lacing ropes — outer -->
+          <line x1="5"  y1="45" x2="5"  y2="78" stroke="#b8872a" stroke-width="2" opacity=".8"/>
+          <line x1="43" y1="45" x2="43" y2="78" stroke="#b8872a" stroke-width="2" opacity=".8"/>
+          <!-- lacing — inner verticals -->
+          <line x1="10" y1="42" x2="10" y2="80" stroke="#c9973a" stroke-width="1" opacity=".5"/>
+          <line x1="17" y1="40" x2="17" y2="81" stroke="#c9973a" stroke-width=".9" opacity=".4"/>
+          <line x1="31" y1="40" x2="31" y2="81" stroke="#c9973a" stroke-width=".9" opacity=".4"/>
+          <line x1="38" y1="42" x2="38" y2="80" stroke="#c9973a" stroke-width="1" opacity=".5"/>
+          <!-- horizontal tension bands -->
+          <path d="M5,52 Q24,48 43,52" fill="none" stroke="#c9973a" stroke-width=".9" opacity=".5"/>
+          <path d="M5,62 Q24,58 43,62" fill="none" stroke="#c9973a" stroke-width=".9" opacity=".5"/>
+          <path d="M5,72 Q24,68 43,72" fill="none" stroke="#c9973a" stroke-width=".9" opacity=".5"/>
+          <!-- bottom rim -->
+          <ellipse cx="24" cy="88" rx="20" ry="6" fill="#3c1008"/>
+          <ellipse cx="24" cy="87" rx="18" ry="4.5" fill="#200802"/>
+
+          <!-- DAYAN — smaller, higher pitched, right -->
+          <path d="M58,26 Q58,12 74,12 Q90,12 90,26 L88,74 Q88,86 74,86 Q60,86 60,74 Z" fill="url(#tBody2)"/>
+          <ellipse cx="74" cy="80" rx="15" ry="5.5" fill="url(#tShadL)"/>
+          <path d="M61,24 Q61,14 72,13 Q80,13 87,20" fill="url(#tHighL)" opacity=".9"/>
+          <!-- head -->
+          <ellipse cx="74" cy="24" rx="16" ry="7" fill="url(#tSkin2)"/>
+          <!-- dayan syahi — 2-ring tuned patch -->
+          <ellipse cx="74" cy="24" rx="11" ry="4.8" fill="#180805" opacity=".9"/>
+          <ellipse cx="74" cy="24" rx="7.5" ry="3.2" fill="rgba(160,100,30,.18)"/>
+          <ellipse cx="74" cy="24" rx="5.5" ry="2.4" fill="#0c0402" opacity=".95"/>
+          <ellipse cx="74" cy="24" rx="9.5" ry="4.1" fill="none" stroke="rgba(80,40,10,.35)" stroke-width=".7"/>
+          <ellipse cx="68" cy="21" rx="4" ry="1.8" fill="rgba(255,245,200,.12)"/>
+          <!-- lacing -->
+          <line x1="59" y1="34" x2="59" y2="72" stroke="#b8872a" stroke-width="2" opacity=".8"/>
+          <line x1="89" y1="34" x2="89" y2="72" stroke="#b8872a" stroke-width="2" opacity=".8"/>
+          <line x1="63" y1="32" x2="63" y2="74" stroke="#c9973a" stroke-width=".9" opacity=".5"/>
+          <line x1="69" y1="30" x2="69" y2="75" stroke="#c9973a" stroke-width=".8" opacity=".4"/>
+          <line x1="79" y1="30" x2="79" y2="75" stroke="#c9973a" stroke-width=".8" opacity=".4"/>
+          <line x1="85" y1="32" x2="85" y2="74" stroke="#c9973a" stroke-width=".9" opacity=".5"/>
+          <path d="M59,44 Q74,40 89,44" fill="none" stroke="#c9973a" stroke-width=".9" opacity=".5"/>
+          <path d="M59,56 Q74,52 89,56" fill="none" stroke="#c9973a" stroke-width=".9" opacity=".5"/>
+          <path d="M59,68 Q74,64 89,68" fill="none" stroke="#c9973a" stroke-width=".9" opacity=".5"/>
+          <!-- bottom rim -->
+          <ellipse cx="74" cy="82" rx="16" ry="5.5" fill="#3c1008"/>
+          <ellipse cx="74" cy="81" rx="14" ry="4" fill="#200802"/>
+          <!-- ground shadow -->
+          <ellipse cx="50" cy="100" rx="42" ry="5.5" fill="rgba(0,0,0,.14)" style="animation:shadowPulse 3.5s ease-in-out infinite"/>
+        </svg>
+      </div>
+
+      <!-- DANCER — large anchor (200px), full Bharatanatyam figure -->
+      <div class="section-illo" style="animation:illoFloat 4.5s ease-in-out infinite;">
+        <svg width="200" height="240" viewBox="0 0 110 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="dSkin" cx="40%" cy="28%" r="65%"><stop offset="0%" stop-color="#f8c890"/><stop offset="50%" stop-color="#d89050"/><stop offset="100%" stop-color="#a06030"/></radialGradient>
+            <linearGradient id="dCostTop" x1="0" y1="0" x2=".25" y2="1"><stop offset="0%" stop-color="#a82030"/><stop offset="50%" stop-color="#821526"/><stop offset="100%" stop-color="#60101a"/></linearGradient>
+            <linearGradient id="dSkirt" x1="0" y1="0" x2=".1" y2="1"><stop offset="0%" stop-color="#921828"/><stop offset="50%" stop-color="#720f1e"/><stop offset="100%" stop-color="#4e0c14"/></linearGradient>
+            <linearGradient id="dFan" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#841420"/><stop offset="100%" stop-color="#500c16"/></linearGradient>
+            <radialGradient id="dHair" cx="50%" cy="20%" r="65%"><stop offset="0%" stop-color="#3c1c08"/><stop offset="100%" stop-color="#180600"/></radialGradient>
+            <radialGradient id="dGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(240,192,64,.12)"/><stop offset="100%" stop-color="rgba(240,192,64,0)"/></radialGradient>
+          </defs>
+          <!-- soft ambient glow -->
+          <ellipse cx="55" cy="65" rx="50" ry="60" fill="url(#dGlow)"/>
+          <!-- floor shadow -->
+          <ellipse cx="55" cy="128" rx="32" ry="5" fill="rgba(0,0,0,.15)" style="animation:shadowPulse 4.5s ease-in-out infinite"/>
+
+          <!-- === LEGS — mandala stance (wide plié, weight forward) === -->
+          <!-- Right leg (bent, outer) -->
+          <path d="M52,92 Q48,102 45,112 Q43,119 47,122 Q51,124 53,119 Q55,112 55,104 L58,92Z" fill="url(#dSkin)"/>
+          <!-- Left leg (extended out to right) -->
+          <path d="M60,92 Q65,101 70,110 Q73,116 77,113 Q81,111 78,105 Q74,99 68,92 L63,89Z" fill="url(#dSkin)"/>
+          <!-- ankle shadow -->
+          <path d="M44,119 Q47,123 53,121" stroke="#a07040" stroke-width=".6" fill="none" opacity=".5"/>
+          <!-- ghungroo — left ankle, gold jingling bells -->
+          <rect x="39" y="121" width="12" height="3" rx="1.5" fill="#b8870a"/>
+          <rect x="40" y="120" width="10" height="2" rx="1" fill="#d4a030"/>
+          <circle cx="41" cy="122" r="1.2" fill="#f0c040"/><circle cx="44" cy="123" r="1.2" fill="#f0c040"/><circle cx="47" cy="122" r="1.2" fill="#f0c040"/><circle cx="50" cy="123" r="1.2" fill="#f0c040"/>
+          <!-- ghungroo right -->
+          <rect x="67" y="112" width="10" height="3" rx="1.5" fill="#b8870a" transform="rotate(-12,72,113)"/>
+          <circle cx="68" cy="113" r="1.1" fill="#f0c040"/><circle cx="71" cy="114" r="1.1" fill="#f0c040"/><circle cx="74" cy="113" r="1.1" fill="#f0c040"/>
+
+          <!-- === SKIRT — wide fan with 7 pleats === -->
+          <path d="M40,60 Q24,68 18,84 Q26,94 34,86 Q38,78 42,70 L55,92 L68,70 Q72,78 76,86 Q84,94 92,84 Q86,68 70,60 Q65,66 55,66 Q45,66 40,60Z" fill="url(#dSkirt)"/>
+          <!-- pleat lines (fan detail) -->
+          <line x1="40" y1="60" x2="28" y2="86" stroke="#c9973a" stroke-width=".8" opacity=".5"/>
+          <line x1="44" y1="62" x2="35" y2="88" stroke="#c9973a" stroke-width=".7" opacity=".45"/>
+          <line x1="49" y1="64" x2="43" y2="90" stroke="#c9973a" stroke-width=".7" opacity=".4"/>
+          <line x1="61" y1="64" x2="67" y2="90" stroke="#c9973a" stroke-width=".7" opacity=".4"/>
+          <line x1="66" y1="62" x2="75" y2="88" stroke="#c9973a" stroke-width=".7" opacity=".45"/>
+          <line x1="70" y1="60" x2="82" y2="86" stroke="#c9973a" stroke-width=".8" opacity=".5"/>
+          <!-- skirt hem wave -->
+          <path d="M18,84 Q28,90 38,87 Q46,90 55,92 Q64,90 72,87 Q82,90 92,84" fill="none" stroke="#f0c040" stroke-width="1.4" opacity=".75"/>
+          <path d="M20,80 Q30,86 40,83 Q48,86 55,88 Q62,86 70,83 Q80,86 90,80" fill="none" stroke="#c9973a" stroke-width=".9" opacity=".55"/>
+          <path d="M22,76 Q32,82 42,79 Q55,83 68,79 Q78,82 88,76" fill="none" stroke="#c9973a" stroke-width=".65" opacity=".4"/>
+          <!-- left saree fan drape -->
+          <path d="M40,60 Q30,52 24,42 Q20,38 24,36 Q28,35 32,42 Q36,52 40,60Z" fill="url(#dFan)" opacity=".85"/>
+          <line x1="25" y1="40" x2="36" y2="58" stroke="#f0c040" stroke-width=".7" opacity=".5"/>
+          <line x1="28" y1="38" x2="38" y2="57" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+
+          <!-- === BODICE / TORSO === -->
+          <path d="M40,38 Q55,34 70,38 L68,54 Q64,60 55,60 Q46,60 42,54 Z" fill="url(#dCostTop)"/>
+          <!-- bodice embroidery border (top) -->
+          <path d="M40,38 Q55,34 70,38" stroke="#f0c040" stroke-width="2" opacity=".9"/>
+          <!-- bodice embroidery details -->
+          <path d="M42,42 Q55,38 68,42" stroke="#c9973a" stroke-width=".9" opacity=".65"/>
+          <path d="M43,46 Q55,42 67,46" stroke="#c9973a" stroke-width=".7" opacity=".5"/>
+          <path d="M44,50 Q55,47 66,50" stroke="#f0c040" stroke-width=".6" opacity=".4"/>
+          <!-- border side lines -->
+          <line x1="40" y1="38" x2="42" y2="58" stroke="#f0c040" stroke-width="1.2" opacity=".6"/>
+          <line x1="70" y1="38" x2="68" y2="58" stroke="#f0c040" stroke-width="1.2" opacity=".6"/>
+          <!-- necklace — layered gold -->
+          <path d="M43,38 Q55,46 67,38" fill="none" stroke="#f0c040" stroke-width="1.8"/>
+          <path d="M45,39 Q55,46 65,39" fill="none" stroke="#d4a030" stroke-width="1" opacity=".7"/>
+          <!-- pendant -->
+          <circle cx="55" cy="46" r="2.2" fill="#f0c040"/><circle cx="55" cy="46" r="1.2" fill="#c9973a"/>
+
+          <!-- === NECK & HEAD === -->
+          <rect x="52" y="31" width="6" height="7" rx="3" fill="url(#dSkin)"/>
+          <!-- head — slightly tilted right (engaged posture) -->
+          <ellipse cx="56" cy="21" rx="9.5" ry="10.5" fill="url(#dSkin)"/>
+          <!-- kohl eyes — longer, dramatic -->
+          <ellipse cx="52" cy="21" rx="1.8" ry="1.6" fill="#2c0e06" opacity=".9"/>
+          <ellipse cx="60" cy="21" rx="1.8" ry="1.6" fill="#2c0e06" opacity=".9"/>
+          <!-- eye kohl wing lines -->
+          <path d="M49.5,21 Q51,19.5 54,21" fill="none" stroke="#180602" stroke-width=".9"/>
+          <path d="M57.5,21 Q59,19.5 62,21" fill="none" stroke="#180602" stroke-width=".9"/>
+          <path d="M53,21.5 Q50.5,22.5 49,22" fill="none" stroke="#180602" stroke-width=".7"/>
+          <path d="M61,21.5 Q63,22.5 64.5,22" fill="none" stroke="#180602" stroke-width=".7"/>
+          <!-- bindi -->
+          <circle cx="56" cy="17.5" r="1.8" fill="#c9973a"/>
+          <circle cx="56" cy="17.5" r=".9" fill="#f0c040"/>
+          <!-- nose ring hint -->
+          <circle cx="59" cy="23" r=".8" fill="none" stroke="#f0c040" stroke-width=".8"/>
+          <!-- smile -->
+          <path d="M52,25 Q56,28 60,25" fill="none" stroke="#9a5030" stroke-width="1"/>
+
+          <!-- === HAIR === -->
+          <!-- main bun -->
+          <ellipse cx="56" cy="12" rx="8.5" ry="6" fill="url(#dHair)"/>
+          <ellipse cx="56" cy="11" rx="6" ry="4" fill="#281004"/>
+          <!-- hair parting line -->
+          <line x1="56" y1="9" x2="56" y2="20" stroke="#1a0602" stroke-width=".7" opacity=".6"/>
+          <!-- === MUKUT (headdress) === -->
+          <path d="M48,12 Q46,7 50,4 Q52,8 55,5 Q56,8 57,5 Q60,8 62,4 Q66,7 64,12Z" fill="#c9973a"/>
+          <path d="M48,12 Q46,7 50,4 Q52,8 55,5 Q56,8 57,5 Q60,8 62,4 Q66,7 64,12Z" fill="none" stroke="#f0c040" stroke-width=".8"/>
+          <!-- jewel row in mukut -->
+          <circle cx="50" cy="4" r="1.8" fill="#8b1a2e"/><circle cx="54" cy="3" r="1.6" fill="#f0c040"/><circle cx="56.5" cy="2.5" r="2.2" fill="#c9973a"/><circle cx="59" cy="3" r="1.6" fill="#f0c040"/><circle cx="63" cy="4" r="1.8" fill="#8b1a2e"/>
+          <!-- hair ornament chain -->
+          <path d="M48,14 Q44,18 44,22" fill="none" stroke="#c9973a" stroke-width=".9" opacity=".8"/>
+          <circle cx="44" cy="23" r="1.5" fill="#f0c040"/>
+          <path d="M64,14 Q68,18 68,22" fill="none" stroke="#c9973a" stroke-width=".9" opacity=".8"/>
+          <circle cx="68" cy="23" r="1.5" fill="#f0c040"/>
+          <!-- ear kundan studs -->
+          <circle cx="47" cy="22" r="2" fill="#c9973a"/><circle cx="47" cy="22" r="1" fill="#f0c040"/>
+          <circle cx="65" cy="22" r="2" fill="#c9973a"/><circle cx="65" cy="22" r="1" fill="#f0c040"/>
+
+          <!-- === LEFT ARM — ALAPADMA mudra (lotus, fingers fanned wide) === -->
+          <!-- upper arm -->
+          <path d="M40,42 Q28,36 20,26 Q18,22 20,20 Q22,19 24,22 Q28,30 35,38Z" fill="url(#dSkin)"/>
+          <!-- forearm / wrist -->
+          <path d="M20,20 Q17,16 17,13" fill="none" stroke="url(#dSkin)" stroke-width="5.5" stroke-linecap="round"/>
+          <!-- 5 fingers spread in alapadma -->
+          <line x1="17" y1="13" x2="14" y2="8"  stroke="#d09060" stroke-width="2.8" stroke-linecap="round"/>
+          <line x1="17" y1="12" x2="16" y2="7"  stroke="#d09060" stroke-width="2.6" stroke-linecap="round"/>
+          <line x1="17" y1="11" x2="18" y2="6"  stroke="#d09060" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="18" y1="11" x2="21" y2="7"  stroke="#d09060" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="19" y1="12" x2="23" y2="9"  stroke="#d09060" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- fingertip shadows for dimension -->
+          <circle cx="14" cy="8"  r="1.5" fill="#b07040"/>
+          <circle cx="16" cy="7"  r="1.4" fill="#b07040"/>
+          <circle cx="18" cy="6"  r="1.4" fill="#b07040"/>
+          <circle cx="21" cy="7"  r="1.4" fill="#b07040"/>
+          <circle cx="23" cy="9"  r="1.4" fill="#b07040"/>
+          <!-- bangles (arm) -->
+          <ellipse cx="28" cy="32" rx="3.5" ry="2.2" fill="none" stroke="#f0c040" stroke-width="1.6" transform="rotate(-38,28,32)"/>
+          <ellipse cx="30" cy="29" rx="3.2" ry="2" fill="none" stroke="#c9973a" stroke-width="1.2" transform="rotate(-38,30,29)"/>
+
+          <!-- === RIGHT ARM — PATAKA mudra (flag — flat open hand) === -->
+          <path d="M70,42 Q82,48 90,56 Q90,60 88,58 Q84,54 77,47 L72,43Z" fill="url(#dSkin)"/>
+          <!-- wrist / forearm  -->
+          <path d="M90,56 Q94,54 96,52" fill="none" stroke="url(#dSkin)" stroke-width="5.5" stroke-linecap="round"/>
+          <!-- pataka = 4 fingers together, thumb aside -->
+          <line x1="96" y1="52" x2="100" y2="50" stroke="#d09060" stroke-width="2.8" stroke-linecap="round"/>
+          <line x1="96" y1="53" x2="100" y2="52" stroke="#d09060" stroke-width="2.6" stroke-linecap="round"/>
+          <line x1="96" y1="55" x2="100" y2="54" stroke="#d09060" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="95" y1="57" x2="99" y2="56" stroke="#d09060" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- thumb angled away -->
+          <line x1="94" y1="52" x2="95" y2="49" stroke="#d09060" stroke-width="2.2" stroke-linecap="round"/>
+          <!-- bangles right arm -->
+          <ellipse cx="82" cy="52" rx="3.2" ry="2" fill="none" stroke="#f0c040" stroke-width="1.5" transform="rotate(25,82,52)"/>
+          <ellipse cx="84" cy="54" rx="3" ry="1.8" fill="none" stroke="#c9973a" stroke-width="1.1" transform="rotate(25,84,54)"/>
+        </svg>
+      </div>
+
+      <!-- BANSURI — bamboo flute with musical note particles -->
+      <div class="section-illo">
+        <svg width="100" height="130" viewBox="0 0 80 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bamBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#dab860"/><stop offset="25%" stop-color="#c09840"/><stop offset="65%" stop-color="#9a7828"/><stop offset="100%" stop-color="#785818"/></linearGradient>
+            <linearGradient id="bamShine" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(255,255,220,.28)"/><stop offset="30%" stop-color="rgba(255,255,220,.08)"/><stop offset="100%" stop-color="rgba(255,255,220,0)"/></linearGradient>
+            <linearGradient id="bamShadow" x1="0" y1="0" x2="1" y2="0"><stop offset="60%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,.25)"/></linearGradient>
+            <radialGradient id="handSkin" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#f4c090"/><stop offset="100%" stop-color="#c07840"/></radialGradient>
+          </defs>
+          <!-- floating musical notes — animated rise -->
+          <text x="54" y="24" font-size="16" fill="#f0c040" opacity=".8" font-family="serif" style="animation:noteRise 2.4s ease-in-out infinite">♪</text>
+          <text x="63" y="14" font-size="12" fill="#c9973a" opacity=".6" font-family="serif" style="animation:noteRise 3.1s .5s ease-in-out infinite">♫</text>
+          <text x="47" y="13" font-size="10" fill="#f0c040" opacity=".45" font-family="serif" style="animation:noteRise 2.8s .9s ease-in-out infinite">♩</text>
+          <!-- flute body — thick bamboo, diagonal -->
+          <rect x="4" y="38" width="76" height="14" rx="7" fill="url(#bamBody)" transform="rotate(-26,40,60)"/>
+          <rect x="4" y="38" width="76" height="14" rx="7" fill="url(#bamShine)" transform="rotate(-26,40,60)"/>
+          <rect x="4" y="38" width="76" height="14" rx="7" fill="url(#bamShadow)" transform="rotate(-26,40,60)"/>
+          <!-- bamboo node rings — 3 segments -->
+          <rect x="10" y="37" width="5" height="16" rx="2.5" fill="#b88830" transform="rotate(-26,40,60)"/>
+          <rect x="38" y="37" width="4" height="16" rx="2" fill="#b88830" transform="rotate(-26,40,60)"/>
+          <rect x="66" y="37" width="5" height="16" rx="2.5" fill="#b88830" transform="rotate(-26,40,60)"/>
+          <!-- embouchure blow hole -->
+          <ellipse cx="18" cy="43" rx="4" ry="3" fill="#2a1005" opacity=".9" transform="rotate(-26,40,60)"/>
+          <!-- 6 finger holes with subtle glow animation -->
+          <circle cx="28" cy="43" r="3.2" fill="#2a1005" transform="rotate(-26,40,60)"/>
+          <circle cx="34" cy="42" r="3.2" fill="#2a1005" transform="rotate(-26,40,60)"/>
+          <circle cx="40" cy="42" r="3" fill="#2a1005" transform="rotate(-26,40,60)" style="animation:flameFlicker 3s 0.2s ease-in-out infinite"/>
+          <circle cx="46" cy="41" r="3" fill="#2a1005" transform="rotate(-26,40,60)"/>
+          <circle cx="52" cy="41" r="2.8" fill="#2a1005" transform="rotate(-26,40,60)"/>
+          <circle cx="58" cy="40" r="2.8" fill="#2a1005" transform="rotate(-26,40,60)"/>
+          <!-- left hand holding lower section -->
+          <ellipse cx="28" cy="72" rx="10" ry="7" fill="url(#handSkin)" transform="rotate(-26,28,72)"/>
+          <!-- left hand fingers -->
+          <path d="M20,76 Q18,82 20,86" fill="none" stroke="#c07840" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M24,79 Q22,85 24,89" fill="none" stroke="#c07840" stroke-width="2" stroke-linecap="round"/>
+          <path d="M28,80 Q27,86 29,90" fill="none" stroke="#c07840" stroke-width="1.9" stroke-linecap="round"/>
+          <path d="M32,79 Q31,85 33,88" fill="none" stroke="#c07840" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- right hand holding upper section -->
+          <ellipse cx="50" cy="58" rx="10" ry="7" fill="url(#handSkin)" transform="rotate(-26,50,58)"/>
+          <path d="M42,62 Q40,68 42,72" fill="none" stroke="#c07840" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M46,65 Q44,71 46,75" fill="none" stroke="#c07840" stroke-width="2" stroke-linecap="round"/>
+          <path d="M50,66 Q49,72 51,76" fill="none" stroke="#c07840" stroke-width="1.9" stroke-linecap="round"/>
+          <!-- ground shadow -->
+          <ellipse cx="40" cy="112" rx="28" ry="4.5" fill="rgba(0,0,0,.1)"/>
+        </svg>
+      </div>
+
+    </div>
+    <div class="about-deco-row" id="aboutDecoRow" style="display:none">
+
+      <!-- PRODIP — oil lamp with flame glow -->
       <div class="deco-icon" data-delay="0">
-        <svg width="52" height="72" viewBox="0 0 52 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="26" cy="8" rx="4" ry="7" fill="#e8c070" opacity=".9"/>
-          <path d="M26,2 C22,5 21,11 26,14 C31,11 30,5 26,2Z" fill="#c9973a"/>
-          <line x1="26" y1="14" x2="26" y2="22" stroke="#4e0f1c" stroke-width="1.5"/>
-          <path d="M14,22 C14,18 38,18 38,22 L36,32 C36,35 28,37 26,37 C24,37 16,35 16,32 Z" fill="none" stroke="#7a1c2e" stroke-width="1.5"/>
-          <path d="M36,26 Q44,24 44,20 Q40,19 36,23" fill="none" stroke="#7a1c2e" stroke-width="1.2"/>
-          <line x1="26" y1="37" x2="26" y2="56" stroke="#7a1c2e" stroke-width="1.5"/>
-          <ellipse cx="26" cy="56" rx="12" ry="4" fill="none" stroke="#7a1c2e" stroke-width="1.5"/>
-          <path d="M18,56 Q22,68 26,68 Q30,68 34,56" fill="none" stroke="#7a1c2e" stroke-width="1.3"/>
-          <ellipse cx="26" cy="68" rx="8" ry="2.5" fill="none" stroke="#c9973a" stroke-width="1"/>
+        <svg width="64" height="80" viewBox="0 0 64 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="flameGlow" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#ffe066" stop-opacity=".8"/><stop offset="100%" stop-color="#e85d04" stop-opacity="0"/></radialGradient>
+            <radialGradient id="lampBody" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#d4a843"/><stop offset="100%" stop-color="#8b5e1a"/></radialGradient>
+          </defs>
+          <!-- glow halo -->
+          <ellipse cx="32" cy="24" rx="18" ry="20" fill="url(#flameGlow)" opacity=".6"/>
+          <!-- flame -->
+          <path d="M32,8 C30,12 27,16 28,20 C29,23 31,24 32,24 C33,24 35,23 36,20 C37,16 34,12 32,8Z" fill="#ffe066"/>
+          <path d="M32,10 C31,13 29,16 30,19 C31,21 32,22 32,22 C32,22 33,21 34,19 C35,16 33,13 32,10Z" fill="#ff9a3c"/>
+          <path d="M32,12 C31.5,14 30.5,17 31,19 C31.5,20.5 32,21 32,21 C32,21 32.5,20.5 33,19 C33.5,17 32.5,14 32,12Z" fill="#fff4b0"/>
+          <!-- wick -->
+          <line x1="32" y1="24" x2="32" y2="28" stroke="#5c3a1e" stroke-width="1.5"/>
+          <!-- oil bowl -->
+          <path d="M20,28 Q20,24 32,24 Q44,24 44,28 L42,38 Q40,44 32,44 Q24,44 22,38 Z" fill="url(#lampBody)"/>
+          <path d="M20,28 Q20,24 32,24 Q44,24 44,28" fill="none" stroke="#f0c040" stroke-width="1.2"/>
+          <!-- spout -->
+          <path d="M42,30 Q50,28 52,24 Q50,23 46,26 Q44,28 42,30Z" fill="#c9973a"/>
+          <!-- stem -->
+          <rect x="29" y="44" width="6" height="14" rx="2" fill="#8b5e1a"/>
+          <rect x="28" y="43" width="8" height="3" rx="1" fill="#c9973a"/>
+          <!-- base -->
+          <ellipse cx="32" cy="60" rx="16" ry="5" fill="#8b5e1a"/>
+          <ellipse cx="32" cy="58" rx="14" ry="3.5" fill="#c9973a"/>
+          <path d="M18,60 Q32,68 46,60" fill="none" stroke="#f0c040" stroke-width=".8" opacity=".6"/>
+          <!-- decorative dots on base -->
+          <circle cx="24" cy="58" r="1.5" fill="#f0c040" opacity=".7"/>
+          <circle cx="32" cy="58" r="1.5" fill="#f0c040" opacity=".7"/>
+          <circle cx="40" cy="58" r="1.5" fill="#f0c040" opacity=".7"/>
         </svg>
-        <span class="deco-icon-label">Prodip</span>
       </div>
+
+      <!-- TABLA — pair of drums with taut skin detail -->
       <div class="deco-icon" data-delay="1">
-        <svg width="56" height="72" viewBox="0 0 56 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12,14 Q10,42 14,60 Q20,68 28,68 Q36,68 42,60 Q46,42 44,14" fill="none" stroke="#7a1c2e" stroke-width="1.5"/>
-          <ellipse cx="28" cy="14" rx="16" ry="6" fill="rgba(122,28,46,.08)" stroke="#7a1c2e" stroke-width="1.5"/>
-          <ellipse cx="28" cy="14" rx="9" ry="3.5" fill="rgba(20,5,10,.15)" stroke="#4e0f1c" stroke-width="1"/>
-          <ellipse cx="28" cy="64" rx="14" ry="4" fill="none" stroke="#7a1c2e" stroke-width="1.2"/>
+        <svg width="72" height="80" viewBox="0 0 72 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="tablaSkin" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#e8d5b0"/><stop offset="100%" stop-color="#b89060"/></radialGradient>
+            <linearGradient id="tablaBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7a3010"/><stop offset="100%" stop-color="#3d1208"/></linearGradient>
+          </defs>
+          <!-- BAYAN (left, larger) -->
+          <path d="M6,28 Q6,18 18,18 Q30,18 30,28 L30,58 Q30,66 18,66 Q6,66 6,58 Z" fill="url(#tablaBody)"/>
+          <ellipse cx="18" cy="28" rx="12" ry="5" fill="url(#tablaSkin)"/>
+          <ellipse cx="18" cy="28" rx="8" ry="3" fill="#2a0e05" opacity=".7"/>
+          <ellipse cx="18" cy="28" rx="4" ry="1.5" fill="#1a0803"/>
+          <!-- lacing stripes -->
+          <line x1="8"  y1="34" x2="8"  y2="56" stroke="#c9973a" stroke-width="1.2" opacity=".6"/>
+          <line x1="28" y1="34" x2="28" y2="56" stroke="#c9973a" stroke-width="1.2" opacity=".6"/>
+          <line x1="6"  y1="42" x2="30" y2="42" stroke="#c9973a" stroke-width=".7" opacity=".4"/>
+          <line x1="6"  y1="50" x2="30" y2="50" stroke="#c9973a" stroke-width=".7" opacity=".4"/>
+          <ellipse cx="18" cy="62" rx="12" ry="4" fill="#5c2008"/>
+          <!-- DAYAN (right, smaller) -->
+          <path d="M36,22 Q36,14 48,14 Q60,14 60,22 L60,56 Q60,64 48,64 Q36,64 36,56 Z" fill="url(#tablaBody)"/>
+          <ellipse cx="48" cy="22" rx="12" ry="5" fill="url(#tablaSkin)"/>
+          <ellipse cx="48" cy="22" rx="8"  ry="3" fill="#2a0e05" opacity=".7"/>
+          <ellipse cx="48" cy="22" rx="5"  ry="2" fill="#e8c88a" opacity=".5"/>
+          <ellipse cx="48" cy="22" rx="3"  ry="1.2" fill="#1a0803"/>
+          <line x1="38" y1="30" x2="38" y2="54" stroke="#c9973a" stroke-width="1.2" opacity=".6"/>
+          <line x1="58" y1="30" x2="58" y2="54" stroke="#c9973a" stroke-width="1.2" opacity=".6"/>
+          <line x1="36" y1="38" x2="60" y2="38" stroke="#c9973a" stroke-width=".7" opacity=".4"/>
+          <line x1="36" y1="46" x2="60" y2="46" stroke="#c9973a" stroke-width=".7" opacity=".4"/>
+          <ellipse cx="48" cy="60" rx="12" ry="4" fill="#5c2008"/>
         </svg>
-        <span class="deco-icon-label">Tabla</span>
       </div>
+
+      <!-- SITAR — long neck, gourd body, frets & strings -->
       <div class="deco-icon" data-delay="2">
-        <svg width="48" height="80" viewBox="0 0 48 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="21" y="4" width="6" height="44" rx="3" fill="none" stroke="#7a1c2e" stroke-width="1.4"/>
-          <line x1="20" y1="12" x2="28" y2="12" stroke="#c9973a" stroke-width=".8" opacity=".7"/>
-          <line x1="20" y1="18" x2="28" y2="18" stroke="#c9973a" stroke-width=".8" opacity=".7"/>
-          <line x1="20" y1="24" x2="28" y2="24" stroke="#c9973a" stroke-width=".8" opacity=".7"/>
-          <line x1="24" y1="4" x2="24" y2="72" stroke="#c9973a" stroke-width=".6" opacity=".5"/>
-          <ellipse cx="24" cy="66" rx="18" ry="14" fill="rgba(122,28,46,.08)" stroke="#7a1c2e" stroke-width="1.4"/>
-          <circle cx="24" cy="66" r="4" fill="none" stroke="#7a1c2e" stroke-width="1"/>
+        <svg width="52" height="88" viewBox="0 0 52 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="sitarGourd" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#c8a060"/><stop offset="100%" stop-color="#6b3a10"/></radialGradient>
+            <linearGradient id="sitarNeck" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8b5e1a"/><stop offset="100%" stop-color="#5c3a10"/></linearGradient>
+          </defs>
+          <!-- tuning pegs -->
+          <ellipse cx="28" cy="6"  rx="3" ry="2" fill="#c9973a" transform="rotate(-30,28,6)"/>
+          <ellipse cx="24" cy="10" rx="3" ry="2" fill="#c9973a" transform="rotate(-30,24,10)"/>
+          <ellipse cx="20" cy="14" rx="3" ry="2" fill="#c9973a" transform="rotate(-30,20,14)"/>
+          <!-- neck -->
+          <path d="M22,8 Q18,8 17,14 L16,54" stroke="url(#sitarNeck)" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <!-- frets -->
+          <line x1="13" y1="22" x2="21" y2="20" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="28" x2="21" y2="26" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="34" x2="21" y2="32" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="40" x2="21" y2="38" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="46" x2="20" y2="44" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <!-- large gourd body -->
+          <ellipse cx="26" cy="72" rx="20" ry="14" fill="url(#sitarGourd)"/>
+          <ellipse cx="22" cy="68" rx="6" ry="5" fill="rgba(255,255,255,.12)"/>
+          <!-- soundhole -->
+          <ellipse cx="26" cy="72" rx="6" ry="4" fill="#3d1a05"/>
+          <ellipse cx="26" cy="72" rx="4" ry="2.5" fill="#2a1008"/>
+          <!-- bridge -->
+          <rect x="20" y="60" width="12" height="3" rx="1" fill="#8b5e1a"/>
+          <!-- strings -->
+          <line x1="17" y1="8"  x2="22" y2="62" stroke="#e8e0c8" stroke-width=".6" opacity=".7"/>
+          <line x1="18" y1="8"  x2="23" y2="62" stroke="#e8e0c8" stroke-width=".5" opacity=".5"/>
+          <line x1="19" y1="8"  x2="24" y2="62" stroke="#e8e0c8" stroke-width=".5" opacity=".5"/>
+          <!-- small gourd at top -->
+          <ellipse cx="30" cy="12" rx="8" ry="6" fill="url(#sitarGourd)" opacity=".8"/>
         </svg>
-        <span class="deco-icon-label">Sitar</span>
       </div>
+
+      <!-- BIOSCOPE — vintage movie camera -->
       <div class="deco-icon" data-delay="3">
-        <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="20" width="44" height="30" rx="4" fill="rgba(78,15,28,.15)" stroke="#7a1c2e" stroke-width="1.5"/>
-          <circle cx="20" cy="16" r="10" fill="none" stroke="#7a1c2e" stroke-width="1.3"/>
-          <circle cx="20" cy="16" r="6" fill="none" stroke="#c9973a" stroke-width=".8"/>
-          <circle cx="44" cy="16" r="10" fill="none" stroke="#7a1c2e" stroke-width="1.3"/>
-          <circle cx="44" cy="16" r="6" fill="none" stroke="#c9973a" stroke-width=".8"/>
-          <circle cx="32" cy="35" r="8" fill="rgba(201,151,58,.08)" stroke="#c9973a" stroke-width="1.2"/>
+        <svg width="72" height="80" viewBox="0 0 72 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="lens" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#a0c8e8"/><stop offset="100%" stop-color="#1a3a5c"/></radialGradient>
+            <linearGradient id="camBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5c3010"/><stop offset="100%" stop-color="#2a1008"/></linearGradient>
+          </defs>
+          <!-- film reels top -->
+          <circle cx="20" cy="14" r="10" fill="#3d2008" stroke="#c9973a" stroke-width="1.2"/>
+          <circle cx="20" cy="14" r="6"  fill="#2a1005" stroke="#f0c040" stroke-width=".8"/>
+          <circle cx="20" cy="14" r="2"  fill="#c9973a"/>
+          <line x1="20" y1="4"  x2="20" y2="24" stroke="#8b5e1a" stroke-width="1" opacity=".5"/>
+          <line x1="10" y1="14" x2="30" y2="14" stroke="#8b5e1a" stroke-width="1" opacity=".5"/>
+          <circle cx="52" cy="14" r="10" fill="#3d2008" stroke="#c9973a" stroke-width="1.2"/>
+          <circle cx="52" cy="14" r="6"  fill="#2a1005" stroke="#f0c040" stroke-width=".8"/>
+          <circle cx="52" cy="14" r="2"  fill="#c9973a"/>
+          <line x1="52" y1="4"  x2="52" y2="24" stroke="#8b5e1a" stroke-width="1" opacity=".5"/>
+          <line x1="42" y1="14" x2="62" y2="14" stroke="#8b5e1a" stroke-width="1" opacity=".5"/>
+          <!-- camera body -->
+          <rect x="8" y="24" width="56" height="38" rx="5" fill="url(#camBody)"/>
+          <rect x="8" y="24" width="56" height="38" rx="5" fill="none" stroke="#c9973a" stroke-width="1.2"/>
+          <!-- decorative rivets -->
+          <circle cx="14" cy="30" r="2" fill="#c9973a"/>
+          <circle cx="58" cy="30" r="2" fill="#c9973a"/>
+          <circle cx="14" cy="56" r="2" fill="#c9973a"/>
+          <circle cx="58" cy="56" r="2" fill="#c9973a"/>
+          <!-- main lens -->
+          <circle cx="36" cy="43" r="14" fill="#1a1a2e" stroke="#c9973a" stroke-width="1.5"/>
+          <circle cx="36" cy="43" r="10" fill="url(#lens)"/>
+          <circle cx="36" cy="43" r="6"  fill="#0d1b2a"/>
+          <circle cx="36" cy="43" r="3"  fill="#1a3a5c"/>
+          <circle cx="33" cy="40" r="1.5" fill="rgba(255,255,255,.4)"/>
+          <!-- film strip accent -->
+          <rect x="10" y="26" width="6" height="34" rx="1" fill="rgba(201,151,58,.12)" stroke="#c9973a" stroke-width=".6"/>
+          <rect x="52" y="26" width="6" height="34" rx="1" fill="rgba(201,151,58,.12)" stroke="#c9973a" stroke-width=".6"/>
+          <rect x="11" y="30" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/>
+          <rect x="11" y="38" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/>
+          <rect x="11" y="46" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/>
+          <rect x="53" y="30" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/>
+          <rect x="53" y="38" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/>
+          <rect x="53" y="46" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/>
+          <!-- tripod legs -->
+          <line x1="36" y1="62" x2="20" y2="78" stroke="#5c3010" stroke-width="2"/>
+          <line x1="36" y1="62" x2="36" y2="78" stroke="#5c3010" stroke-width="2"/>
+          <line x1="36" y1="62" x2="52" y2="78" stroke="#5c3010" stroke-width="2"/>
         </svg>
-        <span class="deco-icon-label">Bioscope</span>
       </div>
+
+      <!-- NRITYA — bharatanatyam dancer in color -->
       <div class="deco-icon" data-delay="4">
-        <svg width="52" height="72" viewBox="0 0 52 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="26" cy="8" r="7" fill="none" stroke="#7a1c2e" stroke-width="1.4"/>
-          <path d="M26,15 C22,20 20,28 22,34 C24,38 28,40 30,36 C32,32 34,26 30,22 C28,20 26,16 26,15Z" fill="rgba(122,28,46,.06)" stroke="#7a1c2e" stroke-width="1.3"/>
-          <path d="M22,22 C16,18 10,14 8,8 C10,6 14,8 16,12 C18,16 20,20 22,22" fill="none" stroke="#7a1c2e" stroke-width="1.1"/>
-          <path d="M22,34 Q16,42 18,52 Q22,56 26,52" fill="none" stroke="#7a1c2e" stroke-width="1.1"/>
-          <circle cx="8" cy="7" r="3" fill="none" stroke="#c9973a" stroke-width=".9"/>
+        <svg width="64" height="88" viewBox="0 0 64 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="skin" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#e8b090"/><stop offset="100%" stop-color="#c07848"/></radialGradient>
+          </defs>
+          <!-- head -->
+          <ellipse cx="32" cy="8" rx="6" ry="7" fill="url(#skin)"/>
+          <!-- hair / bun -->
+          <ellipse cx="32" cy="3" rx="5" ry="3" fill="#2a1008"/>
+          <ellipse cx="32" cy="2" rx="3" ry="2" fill="#4a2010"/>
+          <circle cx="32" cy="1" r="2" fill="#c9973a"/>
+          <!-- face details -->
+          <ellipse cx="30" cy="8" rx="1" ry="1.2" fill="#6b3020" opacity=".8"/>
+          <ellipse cx="34" cy="8" rx="1" ry="1.2" fill="#6b3020" opacity=".8"/>
+          <path d="M30,11 Q32,13 34,11" stroke="#c07848" stroke-width=".8" fill="none"/>
+          <!-- bindi -->
+          <circle cx="32" cy="6" r=".8" fill="#c9973a"/>
+          <!-- neck & jewelry -->
+          <rect x="30" y="15" width="4" height="3" rx="1" fill="url(#skin)"/>
+          <path d="M28,17 Q32,21 36,17" stroke="#f0c040" stroke-width="1.2" fill="none"/>
+          <!-- costume bodice — deep red -->
+          <path d="M24,18 Q32,16 40,18 L38,30 Q36,34 32,34 Q28,34 26,30 Z" fill="#8b1a2e"/>
+          <path d="M26,20 Q32,18 38,20" stroke="#f0c040" stroke-width=".8" fill="none" opacity=".8"/>
+          <!-- gold border on costume -->
+          <path d="M24,18 Q32,16 40,18" stroke="#f0c040" stroke-width="1.4"/>
+          <!-- left arm raised with mudra -->
+          <path d="M24,22 Q14,18 10,12 Q10,8 14,10 Q16,14 20,18 Q22,20 24,22" fill="url(#skin)" stroke="#c07848" stroke-width=".5"/>
+          <!-- fingers of raised hand -->
+          <path d="M10,12 Q8,10 9,8 Q11,9 10,12" fill="url(#skin)"/>
+          <path d="M12,9  Q10,7 11,5 Q13,6 12,9"  fill="url(#skin)"/>
+          <!-- right arm extended -->
+          <path d="M40,22 Q50,26 54,32 Q52,36 50,32 Q46,28 40,26" fill="url(#skin)" stroke="#c07848" stroke-width=".5"/>
+          <!-- skirt — layered -->
+          <path d="M26,30 Q16,36 12,52 Q18,58 22,52 Q24,44 28,40 L32,60 L36,40 Q40,44 42,52 Q46,58 52,52 Q48,36 38,30 Q36,34 32,34 Q28,34 26,30Z" fill="#8b1a2e"/>
+          <!-- gold hem lines -->
+          <path d="M14,48 Q24,54 32,52 Q40,54 50,48" stroke="#f0c040" stroke-width="1" fill="none" opacity=".8"/>
+          <path d="M12,52 Q24,60 32,58 Q40,60 52,52" stroke="#f0c040" stroke-width="1.2" fill="none"/>
+          <!-- anklets -->
+          <path d="M18,60 Q22,64 26,62" stroke="#f0c040" stroke-width="1.4"/>
+          <path d="M38,62 Q42,64 46,60" stroke="#f0c040" stroke-width="1.4"/>
+          <!-- legs -->
+          <path d="M22,58 Q20,70 22,78 Q24,82 26,78 Q26,68 28,60" fill="url(#skin)"/>
+          <path d="M36,60 Q38,68 38,78 Q40,82 42,78 Q44,70 42,58" fill="url(#skin)"/>
+          <!-- feet -->
+          <ellipse cx="24" cy="80" rx="5" ry="3" fill="#c07848"/>
+          <ellipse cx="40" cy="80" rx="5" ry="3" fill="#c07848"/>
+          <!-- toe ring -->
+          <circle cx="22" cy="81" r="1" fill="#f0c040"/>
+          <circle cx="38" cy="81" r="1" fill="#f0c040"/>
         </svg>
-        <span class="deco-icon-label">Nritya</span>
       </div>
+
+      <!-- SUR — bansuri flute in warm gold/bamboo -->
       <div class="deco-icon" data-delay="5">
-        <svg width="52" height="72" viewBox="0 0 52 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="6" y="8" width="10" height="56" rx="5" fill="rgba(122,28,46,.06)" stroke="#7a1c2e" stroke-width="1.4" transform="rotate(-15,26,36)"/>
-          <circle cx="22" cy="20" r="2.2" fill="none" stroke="#c9973a" stroke-width=".9"/>
-          <circle cx="21" cy="27" r="2.2" fill="none" stroke="#c9973a" stroke-width=".9"/>
-          <circle cx="20" cy="34" r="2.2" fill="none" stroke="#c9973a" stroke-width=".9"/>
-          <ellipse cx="14" cy="65" rx="9" ry="5" fill="rgba(122,28,46,.1)" stroke="#7a1c2e" stroke-width="1.2" transform="rotate(-15,14,65)"/>
-          <text x="34" y="28" font-size="10" fill="#c9973a" opacity=".5" font-family="serif">♪</text>
+        <svg width="64" height="80" viewBox="0 0 64 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bambuGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c8a050"/><stop offset="100%" stop-color="#7a5020"/></linearGradient>
+            <linearGradient id="bambuShine" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(255,255,255,.15)"/><stop offset="40%" stop-color="rgba(255,255,255,.0)"/></linearGradient>
+          </defs>
+          <!-- flute body at diagonal -->
+          <rect x="4" y="18" width="56" height="9" rx="4.5" fill="url(#bambuGrad)" transform="rotate(-18,32,40)"/>
+          <rect x="4" y="18" width="56" height="9" rx="4.5" fill="url(#bambuShine)" transform="rotate(-18,32,40)"/>
+          <!-- joint rings -->
+          <rect x="8"  y="17" width="3" height="11" rx="1.5" fill="#c9973a" transform="rotate(-18,32,40)"/>
+          <rect x="52" y="17" width="3" height="11" rx="1.5" fill="#c9973a" transform="rotate(-18,32,40)"/>
+          <!-- blow hole -->
+          <ellipse cx="16" cy="22" rx="3" ry="2" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <!-- finger holes -->
+          <circle cx="26" cy="23" r="2.2" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <circle cx="32" cy="22" r="2.2" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <circle cx="38" cy="21" r="2.2" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <circle cx="44" cy="20" r="2.2" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <circle cx="50" cy="19" r="2.0" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <circle cx="56" cy="18" r="2.0" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <!-- musical notes floating -->
+          <text x="42" y="14" font-size="12" fill="#f0c040" opacity=".7" font-family="serif">♪</text>
+          <text x="50" y="8"  font-size="9"  fill="#c9973a" opacity=".5" font-family="serif">♫</text>
+          <text x="34" y="10" font-size="8"  fill="#f0c040" opacity=".4" font-family="serif">♩</text>
+          <!-- hands holding flute -->
+          <ellipse cx="28" cy="52" rx="7" ry="5" fill="#e8b090" transform="rotate(-18,28,52)"/>
+          <ellipse cx="44" cy="44" rx="7" ry="5" fill="#e8b090" transform="rotate(-18,44,44)"/>
+          <!-- fingers suggestion -->
+          <path d="M22,54 Q20,58 22,60" stroke="#c07848" stroke-width="1.2" fill="none"/>
+          <path d="M25,56 Q23,60 25,62" stroke="#c07848" stroke-width="1.2" fill="none"/>
+          <path d="M40,46 Q38,50 40,52" stroke="#c07848" stroke-width="1.2" fill="none"/>
+          <path d="M45,44 Q43,48 45,50" stroke="#c07848" stroke-width="1.2" fill="none"/>
         </svg>
-        <span class="deco-icon-label">Sur</span>
       </div>
+
     </div>
   </div>
 </section>
@@ -1203,7 +1787,34 @@
       <div class="section-rule"><span>✦</span></div>
     </div>
     <p class="cinema-intro reveal" style="margin-bottom:10px;font-style:normal;font-size:.85rem;letter-spacing:.25em;font-family:'Cinzel',serif;color:var(--gold);text-transform:uppercase;">This Year's Theme</p>
+    <!-- BIOSCOPE — floated right in cinema intro -->
+    <div class="section-illo illo-float-right reveal" style="margin-top:4px;">
+      <svg width="90" height="100" viewBox="0 0 72 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="lensC" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#a0c8e8"/><stop offset="100%" stop-color="#1a3a5c"/></radialGradient><linearGradient id="camBodyC" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5c3010"/><stop offset="100%" stop-color="#2a1008"/></linearGradient></defs>
+        <circle cx="20" cy="14" r="10" fill="#3d2008" stroke="#c9973a" stroke-width="1.2"/>
+        <circle cx="20" cy="14" r="6" fill="#2a1005" stroke="#f0c040" stroke-width=".8"/><circle cx="20" cy="14" r="2" fill="#c9973a"/>
+        <line x1="20" y1="4" x2="20" y2="24" stroke="#8b5e1a" stroke-width="1" opacity=".5"/><line x1="10" y1="14" x2="30" y2="14" stroke="#8b5e1a" stroke-width="1" opacity=".5"/>
+        <circle cx="52" cy="14" r="10" fill="#3d2008" stroke="#c9973a" stroke-width="1.2"/>
+        <circle cx="52" cy="14" r="6" fill="#2a1005" stroke="#f0c040" stroke-width=".8"/><circle cx="52" cy="14" r="2" fill="#c9973a"/>
+        <line x1="52" y1="4" x2="52" y2="24" stroke="#8b5e1a" stroke-width="1" opacity=".5"/><line x1="42" y1="14" x2="62" y2="14" stroke="#8b5e1a" stroke-width="1" opacity=".5"/>
+        <rect x="8" y="24" width="56" height="38" rx="5" fill="url(#camBodyC)" stroke="#c9973a" stroke-width="1.2"/>
+        <circle cx="14" cy="30" r="2" fill="#c9973a"/><circle cx="58" cy="30" r="2" fill="#c9973a"/>
+        <circle cx="14" cy="56" r="2" fill="#c9973a"/><circle cx="58" cy="56" r="2" fill="#c9973a"/>
+        <circle cx="36" cy="43" r="14" fill="#1a1a2e" stroke="#c9973a" stroke-width="1.5"/>
+        <circle cx="36" cy="43" r="10" fill="url(#lensC)"/>
+        <circle cx="36" cy="43" r="6" fill="#0d1b2a"/><circle cx="36" cy="43" r="3" fill="#1a3a5c"/>
+        <circle cx="33" cy="40" r="1.5" fill="rgba(255,255,255,.4)"/>
+        <rect x="10" y="26" width="6" height="34" rx="1" fill="rgba(201,151,58,.12)" stroke="#c9973a" stroke-width=".6"/>
+        <rect x="52" y="26" width="6" height="34" rx="1" fill="rgba(201,151,58,.12)" stroke="#c9973a" stroke-width=".6"/>
+        <rect x="11" y="30" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/><rect x="11" y="38" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/><rect x="11" y="46" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/>
+        <rect x="53" y="30" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/><rect x="53" y="38" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/><rect x="53" y="46" width="4" height="5" rx=".5" fill="#c9973a" opacity=".4"/>
+        <line x1="36" y1="62" x2="20" y2="78" stroke="#5c3010" stroke-width="2"/>
+        <line x1="36" y1="62" x2="36" y2="78" stroke="#5c3010" stroke-width="2"/>
+        <line x1="36" y1="62" x2="52" y2="78" stroke="#5c3010" stroke-width="2"/>
+      </svg>
+    </div>
     <p class="cinema-intro reveal">Bengali culture has given the world some of its most influential voices in cinema. This year, Ananda Sandhya celebrates that legacy — the magic of the bioscope that once mesmerised village fairs, and the masters who carried that wonder onto the world stage.</p>
+    <div style="clear:both;"></div>
     <div class="cinema-trio stagger">
 
       <div class="cinema-card">
@@ -1237,10 +1848,52 @@
       </div>
 
     </div>
+
+    <!-- Film Reel + Mancha inline after cinema cards -->
+    <div class="illo-row" id="cinemaIlloRow">
+      <div class="section-illo">
+        <svg width="90" height="90" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="reelC" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#3d1a08"/><stop offset="100%" stop-color="#1a0803"/></radialGradient></defs>
+          <circle cx="30" cy="30" r="27" fill="url(#reelC)" stroke="#c9973a" stroke-width="1.5"/>
+          <!-- spinning spokes group -->
+          <g style="transform-origin:30px 30px;animation:reelSpinSlow 6s linear infinite">
+            <line x1="30" y1="6" x2="30" y2="54" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+            <line x1="6" y1="30" x2="54" y2="30" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+            <line x1="11" y1="11" x2="49" y2="49" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+            <line x1="49" y1="11" x2="11" y2="49" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+          </g>
+          <circle cx="30" cy="30" r="16" fill="#2a1005" stroke="#f0c040" stroke-width="1.2"/>
+          <circle cx="30" cy="14" r="3" fill="#c9973a" opacity=".7"/><circle cx="30" cy="46" r="3" fill="#c9973a" opacity=".7"/>
+          <circle cx="14" cy="30" r="3" fill="#c9973a" opacity=".7"/><circle cx="46" cy="30" r="3" fill="#c9973a" opacity=".7"/>
+          <circle cx="18.7" cy="18.7" r="3" fill="#c9973a" opacity=".5"/><circle cx="41.3" cy="41.3" r="3" fill="#c9973a" opacity=".5"/>
+          <circle cx="41.3" cy="18.7" r="3" fill="#c9973a" opacity=".5"/><circle cx="18.7" cy="41.3" r="3" fill="#c9973a" opacity=".5"/>
+          <circle cx="30" cy="30" r="7" fill="#c9973a" opacity=".9"/>
+          <circle cx="30" cy="30" r="4" fill="#f0c040"/>
+          <circle cx="30" cy="30" r="2" fill="#3d1a08"/>
+        </svg>
+      </div>
+      <div class="section-illo">
+        <svg width="90" height="75" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="curtLc" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5c0f1c"/><stop offset="100%" stop-color="#8b1a2e"/></linearGradient><linearGradient id="curtRc" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8b1a2e"/><stop offset="100%" stop-color="#5c0f1c"/></linearGradient></defs>
+          <rect x="2" y="4" width="68" height="4" rx="2" fill="#8b5e1a"/>
+          <circle cx="4" cy="6" r="3" fill="#c9973a"/><circle cx="68" cy="6" r="3" fill="#c9973a"/><circle cx="36" cy="6" r="2" fill="#c9973a"/>
+          <path d="M4,8 C8,10 16,8 20,14 C24,20 22,34 18,44 C14,52 8,56 4,56 Z" fill="url(#curtLc)"/>
+          <path d="M20,14 C18,22 16,32 18,42" stroke="#f0c040" stroke-width=".6" fill="none" opacity=".3"/>
+          <path d="M18,44 Q14,52 10,56 Q16,54 18,44" fill="#c9973a" opacity=".8"/>
+          <line x1="12" y1="52" x2="10" y2="58" stroke="#f0c040" stroke-width="1"/>
+          <line x1="14" y1="54" x2="13" y2="60" stroke="#f0c040" stroke-width="1"/>
+          <path d="M68,8 C64,10 56,8 52,14 C48,20 50,34 54,44 C58,52 64,56 68,56 Z" fill="url(#curtRc)"/>
+          <path d="M52,14 C54,22 56,32 54,42" stroke="#f0c040" stroke-width=".6" fill="none" opacity=".3"/>
+          <path d="M54,44 Q58,52 62,56 Q56,54 54,44" fill="#c9973a" opacity=".8"/>
+          <line x1="60" y1="52" x2="62" y2="58" stroke="#f0c040" stroke-width="1"/>
+          <line x1="58" y1="54" x2="59" y2="60" stroke="#f0c040" stroke-width="1"/>
+          <ellipse cx="36" cy="56" rx="24" ry="4" fill="rgba(201,151,58,.15)"/>
+          <path d="M36,8 L20,56 L52,56 Z" fill="rgba(255,240,180,.05)"/>
+        </svg>
+      </div>
+    </div>
   </div>
 </section>
-
-<!-- PROGRAM -->
 <section id="program">
   <div class="container">
     <div class="section-header reveal">
@@ -1248,23 +1901,133 @@
       <h2>Order of Performances</h2>
       <div class="section-rule"><span>✦</span></div>
     </div>
+
+    <!-- Program Illustrations -->
+    <div class="program-illo-strip" id="programIlloStrip">
+      <!-- DHOL -->
+      <div class="section-illo">
+        <svg width="80" height="66" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="dholBp" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8b3010"/><stop offset="100%" stop-color="#3d1208"/></linearGradient><radialGradient id="dholSp" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#e8c8a0"/><stop offset="100%" stop-color="#a07840"/></radialGradient></defs>
+          <path d="M10,12 Q10,6 36,6 Q62,6 62,12 L62,48 Q62,54 36,54 Q10,54 10,48 Z" fill="url(#dholBp)"/>
+          <rect x="10" y="26" width="52" height="8" fill="rgba(201,151,58,.18)" stroke="#c9973a" stroke-width=".8"/>
+          <line x1="10" y1="27" x2="62" y2="27" stroke="#f0c040" stroke-width=".5" opacity=".5"/>
+          <line x1="10" y1="33" x2="62" y2="33" stroke="#f0c040" stroke-width=".5" opacity=".5"/>
+          <ellipse cx="10" cy="30" rx="6" ry="18" fill="url(#dholSp)"/>
+          <ellipse cx="10" cy="30" rx="3.5" ry="10" fill="#2a1005" opacity=".6"/>
+          <ellipse cx="62" cy="30" rx="6" ry="18" fill="url(#dholSp)"/>
+          <ellipse cx="62" cy="30" rx="3.5" ry="10" fill="#1a0803"/>
+          <path d="M16,10 L16,50" stroke="#c9973a" stroke-width="1" opacity=".5"/>
+          <path d="M56,10 L56,50" stroke="#c9973a" stroke-width="1" opacity=".5"/>
+          <path d="M24,8  L24,52" stroke="#c9973a" stroke-width=".7" opacity=".35"/>
+          <path d="M48,8  L48,52" stroke="#c9973a" stroke-width=".7" opacity=".35"/>
+          <path d="M20,6 Q36,2 52,6" stroke="#8b5e1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <!-- HARMONIUM -->
+      <div class="section-illo">
+        <svg width="96" height="66" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="harmBp" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5c3010"/><stop offset="100%" stop-color="#2a1005"/></linearGradient></defs>
+          <rect x="4" y="10" width="72" height="44" rx="4" fill="url(#harmBp)" stroke="#c9973a" stroke-width="1.2"/>
+          <rect x="4"  y="10" width="10" height="44" rx="2" fill="#3d1a08" stroke="#c9973a" stroke-width=".8"/>
+          <line x1="9"  y1="14" x2="9"  y2="50" stroke="#f0c040" stroke-width=".6" opacity=".4"/>
+          <line x1="7"  y1="20" x2="14" y2="20" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+          <line x1="7"  y1="28" x2="14" y2="28" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+          <line x1="7"  y1="36" x2="14" y2="36" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+          <line x1="7"  y1="44" x2="14" y2="44" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+          <rect x="66" y="10" width="10" height="44" rx="2" fill="#3d1a08" stroke="#c9973a" stroke-width=".8"/>
+          <line x1="71" y1="14" x2="71" y2="50" stroke="#f0c040" stroke-width=".6" opacity=".4"/>
+          <rect x="14" y="10" width="52" height="14" rx="2" fill="#2a1005" stroke="#c9973a" stroke-width=".8"/>
+          <line x1="20" y1="10" x2="20" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+          <line x1="28" y1="10" x2="28" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+          <line x1="36" y1="10" x2="36" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+          <line x1="44" y1="10" x2="44" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+          <line x1="52" y1="10" x2="52" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+          <line x1="60" y1="10" x2="60" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+          <rect x="15" y="34" width="50" height="16" rx="2" fill="#f5f0e8" stroke="#c9973a" stroke-width=".6"/>
+          <line x1="22" y1="34" x2="22" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+          <line x1="29" y1="34" x2="29" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+          <line x1="36" y1="34" x2="36" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+          <line x1="43" y1="34" x2="43" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+          <line x1="50" y1="34" x2="50" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+          <line x1="57" y1="34" x2="57" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+          <rect x="18" y="34" width="5" height="10" rx="1" fill="#1a0803"/>
+          <rect x="25" y="34" width="5" height="10" rx="1" fill="#1a0803"/>
+          <rect x="39" y="34" width="5" height="10" rx="1" fill="#1a0803"/>
+          <rect x="46" y="34" width="5" height="10" rx="1" fill="#1a0803"/>
+          <rect x="53" y="34" width="5" height="10" rx="1" fill="#1a0803"/>
+        </svg>
+      </div>
+      <!-- STAR DIVIDER -->
+      <div class="section-illo" style="opacity:.5!important;">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><defs><radialGradient id="sgp" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f0c040" stop-opacity=".5"/><stop offset="100%" stop-color="#c9973a" stop-opacity="0"/></radialGradient></defs><circle cx="22" cy="22" r="20" fill="url(#sgp)"/><path d="M22,4 L24.6,14.6 L35.6,11.4 L28.4,20 L38,25.2 L27,26.2 L26.8,38 L22,28.4 L17.2,38 L17,26.2 L6,25.2 L15.6,20 L8.4,11.4 L19.4,14.6 Z" fill="#f0c040" opacity=".8"/><circle cx="22" cy="22" r="3" fill="#c9973a"/></svg>
+        
+      </div>
+      <!-- SITAR -->
+      <div class="section-illo">
+        <svg width="56" height="90" viewBox="0 0 52 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="sitBp" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#c8a060"/><stop offset="100%" stop-color="#6b3a10"/></radialGradient><linearGradient id="sitNp" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8b5e1a"/><stop offset="100%" stop-color="#5c3a10"/></linearGradient></defs>
+          <ellipse cx="28" cy="6"  rx="3" ry="2" fill="#c9973a" transform="rotate(-30,28,6)"/>
+          <ellipse cx="24" cy="10" rx="3" ry="2" fill="#c9973a" transform="rotate(-30,24,10)"/>
+          <ellipse cx="20" cy="14" rx="3" ry="2" fill="#c9973a" transform="rotate(-30,20,14)"/>
+          <path d="M22,8 Q18,8 17,14 L16,54" stroke="url(#sitNp)" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <line x1="13" y1="22" x2="21" y2="20" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="28" x2="21" y2="26" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="34" x2="21" y2="32" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="40" x2="21" y2="38" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="46" x2="20" y2="44" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <ellipse cx="26" cy="72" rx="20" ry="14" fill="url(#sitBp)"/>
+          <ellipse cx="26" cy="72" rx="6" ry="4" fill="#3d1a05"/>
+          <ellipse cx="26" cy="72" rx="4" ry="2.5" fill="#2a1008"/>
+          <rect x="20" y="60" width="12" height="3" rx="1" fill="#8b5e1a"/>
+          <line x1="17" y1="8"  x2="22" y2="62" stroke="#e8e0c8" stroke-width=".6" opacity=".7"/>
+          <line x1="18" y1="8"  x2="23" y2="62" stroke="#e8e0c8" stroke-width=".5" opacity=".5"/>
+          <line x1="19" y1="8"  x2="24" y2="62" stroke="#e8e0c8" stroke-width=".5" opacity=".5"/>
+          <ellipse cx="30" cy="12" rx="8" ry="6" fill="url(#sitBp)" opacity=".8"/>
+          <text x="32" y="36" font-size="10" fill="#f0c040" opacity=".6" font-family="serif">♪</text>
+          <text x="38" y="28" font-size="8" fill="#c9973a" opacity=".4" font-family="serif">♫</text>
+        </svg>
+      </div>
+      <!-- VEENA -->
+      <div class="section-illo">
+        <svg width="62" height="82" viewBox="0 0 56 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="veeBp" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#c8a060"/><stop offset="100%" stop-color="#6b3a10"/></radialGradient><radialGradient id="veeB2p" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#b89050"/><stop offset="100%" stop-color="#5c3010"/></radialGradient></defs>
+          <ellipse cx="34" cy="6"  rx="4" ry="2.5" fill="#c9973a" transform="rotate(20,34,6)"/>
+          <ellipse cx="38" cy="12" rx="4" ry="2.5" fill="#c9973a" transform="rotate(20,38,12)"/>
+          <rect x="24" y="6" width="8" height="40" rx="4" fill="#7a5020"/>
+          <rect x="25" y="6" width="3" height="40" rx="1.5" fill="#9a6830" opacity=".6"/>
+          <line x1="23" y1="14" x2="33" y2="14" stroke="#f0c040" stroke-width=".9" opacity=".8"/>
+          <line x1="23" y1="20" x2="33" y2="20" stroke="#f0c040" stroke-width=".9" opacity=".8"/>
+          <line x1="23" y1="26" x2="33" y2="26" stroke="#f0c040" stroke-width=".9" opacity=".8"/>
+          <line x1="23" y1="32" x2="33" y2="32" stroke="#f0c040" stroke-width=".9" opacity=".8"/>
+          <line x1="23" y1="38" x2="33" y2="38" stroke="#f0c040" stroke-width=".9" opacity=".8"/>
+          <ellipse cx="20" cy="16" rx="10" ry="8" fill="url(#veeB2p)"/>
+          <ellipse cx="28" cy="58" rx="22" ry="14" fill="url(#veeBp)"/>
+          <ellipse cx="28" cy="58" rx="7" ry="5" fill="#3d1a05"/>
+          <ellipse cx="28" cy="58" rx="4" ry="3" fill="#2a1008"/>
+          <rect x="22" y="47" width="12" height="3" rx="1" fill="#8b5e1a"/>
+          <line x1="26" y1="6"  x2="26" y2="50" stroke="#e8e0c8" stroke-width=".6" opacity=".7"/>
+          <line x1="28" y1="6"  x2="28" y2="50" stroke="#e8e0c8" stroke-width=".5" opacity=".5"/>
+          <line x1="30" y1="6"  x2="30" y2="50" stroke="#e8e0c8" stroke-width=".5" opacity=".5"/>
+        </svg>
+      </div>
+    </div>
+
     <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
       <table class="program-table reveal">
         <thead><tr><th>#</th><th>Performance</th><th>Directed by</th><th>Performers</th></tr></thead>
         <tbody class="stagger">
-          <tr><td>01</td><td>Speech &amp; MC Opening</td><td>—</td><td>-</td></tr>
+          <tr><td>01</td><td>Speech &amp; MC Opening</td><td>—</td><td>Dipanwita / Debolina</td></tr>
           <tr><td>02</td><td>BAP Opening Song</td><td>—</td><td>—</td></tr>
-          <tr><td>03</td><td>Instrument</td><td>—</td><td>-</td></tr>
-          <tr><td>04</td><td>Singing</td><td>—</td><td>-</td></tr>
-          <tr><td>05</td><td>Natok</td><td>-</td><td>
+          <tr><td>03</td><td>Instrument</td><td>—</td><td>Arpita / Chaitali</td></tr>
+          <tr><td>04</td><td>Musical</td><td>—</td><td>Dipanwita / Debolina</td></tr>
+          <tr><td>05</td><td>Natok</td><td>Gobindo</td><td>
             <ul class="role-list">
               <li><span class="role-name">Performer Name</span><span class="role-sep">·</span><span class="role-char">Role / Character</span></li>
               <li><span class="role-name">Performer Name</span><span class="role-sep">·</span><span class="role-char">Role / Character</span></li>
               <li><span class="role-name">Performer Name</span><span class="role-sep">·</span><span class="role-char">Role / Character</span></li>
             </ul>
           </td></tr>
-          <tr><td>06</td><td>Dance</td><td>—</td><td>-</td></tr>
-          <tr><td>07</td><td>Prize Distribution</td><td>—</td><td>-</td></tr>
+          <tr><td>06</td><td>Dance</td><td>—</td><td>Dipanwita / Debolina</td></tr>
         </tbody>
       </table>
     </div>
@@ -1299,6 +2062,104 @@
       <div class="video-card"><div class="video-thumb"><div class="play-btn">▶</div><div class="video-thumb-label">Video Coming Soon</div></div><div class="video-info"><h3>Performance Title</h3><p>Description of this performance — artist name, category, a brief note about the act.</p></div></div>
       <div class="video-card"><div class="video-thumb"><div class="play-btn">▶</div><div class="video-thumb-label">Video Coming Soon</div></div><div class="video-info"><h3>Performance Title</h3><p>Description of this performance — artist name, category, a brief note about the act.</p></div></div>
     </div>
+
+    <!-- Inline performance illustrations -->
+    <div class="illo-row" id="videosIlloRow">
+      <!-- MANCHA (stage curtains) — large -->
+      <div class="section-illo">
+        <svg width="110" height="90" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="curtLv" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5c0f1c"/><stop offset="100%" stop-color="#8b1a2e"/></linearGradient><linearGradient id="curtRv" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8b1a2e"/><stop offset="100%" stop-color="#5c0f1c"/></linearGradient></defs>
+          <rect x="2" y="4" width="68" height="4" rx="2" fill="#8b5e1a"/>
+          <circle cx="4" cy="6" r="3" fill="#c9973a"/><circle cx="68" cy="6" r="3" fill="#c9973a"/><circle cx="36" cy="6" r="2" fill="#c9973a"/>
+          <path d="M4,8 C8,10 16,8 20,14 C24,20 22,34 18,44 C14,52 8,56 4,56 Z" fill="url(#curtLv)"/>
+          <path d="M20,14 C18,22 16,32 18,42" stroke="#f0c040" stroke-width=".6" fill="none" opacity=".3"/>
+          <path d="M18,44 Q14,52 10,56 Q16,54 18,44" fill="#c9973a" opacity=".8"/>
+          <line x1="12" y1="52" x2="10" y2="58" stroke="#f0c040" stroke-width="1"/>
+          <line x1="14" y1="54" x2="13" y2="60" stroke="#f0c040" stroke-width="1"/>
+          <path d="M68,8 C64,10 56,8 52,14 C48,20 50,34 54,44 C58,52 64,56 68,56 Z" fill="url(#curtRv)"/>
+          <path d="M52,14 C54,22 56,32 54,42" stroke="#f0c040" stroke-width=".6" fill="none" opacity=".3"/>
+          <path d="M54,44 Q58,52 62,56 Q56,54 54,44" fill="#c9973a" opacity=".8"/>
+          <line x1="60" y1="52" x2="62" y2="58" stroke="#f0c040" stroke-width="1"/>
+          <line x1="58" y1="54" x2="59" y2="60" stroke="#f0c040" stroke-width="1"/>
+          <ellipse cx="36" cy="56" rx="24" ry="4" fill="rgba(201,151,58,.15)"/>
+          <path d="M36,8 L20,56 L52,56 Z" fill="rgba(255,240,180,.05)"/>
+        </svg>
+      </div>
+      <!-- DANCER — taller version -->
+      <div class="section-illo">
+        <svg width="72" height="100" viewBox="0 0 64 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="skinV" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#e8b090"/><stop offset="100%" stop-color="#c07848"/></radialGradient></defs>
+          <ellipse cx="32" cy="8" rx="6" ry="7" fill="url(#skinV)"/>
+          <ellipse cx="32" cy="3" rx="5" ry="3" fill="#2a1008"/><ellipse cx="32" cy="2" rx="3" ry="2" fill="#4a2010"/>
+          <circle cx="32" cy="1" r="2" fill="#c9973a"/>
+          <ellipse cx="30" cy="8" rx="1" ry="1.2" fill="#6b3020" opacity=".8"/><ellipse cx="34" cy="8" rx="1" ry="1.2" fill="#6b3020" opacity=".8"/>
+          <path d="M30,11 Q32,13 34,11" stroke="#c07848" stroke-width=".8" fill="none"/>
+          <circle cx="32" cy="6" r=".8" fill="#c9973a"/>
+          <rect x="30" y="15" width="4" height="3" rx="1" fill="url(#skinV)"/>
+          <path d="M28,17 Q32,21 36,17" stroke="#f0c040" stroke-width="1.2" fill="none"/>
+          <path d="M24,18 Q32,16 40,18 L38,30 Q36,34 32,34 Q28,34 26,30 Z" fill="#1e5c3a"/>
+          <path d="M24,18 Q32,16 40,18" stroke="#f0c040" stroke-width="1.4"/>
+          <path d="M24,22 Q14,18 10,12 Q10,8 14,10 Q16,14 20,18 Q22,20 24,22" fill="url(#skinV)" stroke="#c07848" stroke-width=".5"/>
+          <path d="M10,12 Q8,10 9,8 Q11,9 10,12" fill="url(#skinV)"/>
+          <path d="M12,9 Q10,7 11,5 Q13,6 12,9" fill="url(#skinV)"/>
+          <path d="M40,22 Q50,26 54,32 Q52,36 50,32 Q46,28 40,26" fill="url(#skinV)" stroke="#c07848" stroke-width=".5"/>
+          <path d="M26,30 Q16,36 12,52 Q18,58 22,52 Q24,44 28,40 L32,60 L36,40 Q40,44 42,52 Q46,58 52,52 Q48,36 38,30 Q36,34 32,34 Q28,34 26,30Z" fill="#1e5c3a"/>
+          <path d="M14,48 Q24,54 32,52 Q40,54 50,48" stroke="#f0c040" stroke-width="1" fill="none" opacity=".8"/>
+          <path d="M12,52 Q24,60 32,58 Q40,60 52,52" stroke="#f0c040" stroke-width="1.2" fill="none"/>
+          <path d="M18,60 Q22,64 26,62" stroke="#f0c040" stroke-width="1.4"/><path d="M38,62 Q42,64 46,60" stroke="#f0c040" stroke-width="1.4"/>
+          <path d="M22,58 Q20,70 22,78 Q24,82 26,78 Q26,68 28,60" fill="url(#skinV)"/>
+          <path d="M36,60 Q38,68 38,78 Q40,82 42,78 Q44,70 42,58" fill="url(#skinV)"/>
+          <ellipse cx="24" cy="80" rx="5" ry="3" fill="#c07848"/><ellipse cx="40" cy="80" rx="5" ry="3" fill="#c07848"/>
+          <circle cx="22" cy="81" r="1" fill="#f0c040"/><circle cx="38" cy="81" r="1" fill="#f0c040"/>
+        </svg>
+      </div>
+      <!-- FILM REEL — large, spinning -->
+      <div class="section-illo">
+        <svg width="90" height="90" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="reelV" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#3d1a08"/><stop offset="100%" stop-color="#1a0803"/></radialGradient></defs>
+          <circle cx="30" cy="30" r="27" fill="url(#reelV)" stroke="#c9973a" stroke-width="1.5"/>
+          <g style="transform-origin:30px 30px;animation:reelSpinSlow 5s linear infinite">
+            <line x1="30" y1="6" x2="30" y2="54" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+            <line x1="6" y1="30" x2="54" y2="30" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+            <line x1="11" y1="11" x2="49" y2="49" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+            <line x1="49" y1="11" x2="11" y2="49" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+          </g>
+          <circle cx="30" cy="30" r="16" fill="#2a1005" stroke="#f0c040" stroke-width="1.2"/>
+          <circle cx="30" cy="14" r="3" fill="#c9973a" opacity=".7"/><circle cx="30" cy="46" r="3" fill="#c9973a" opacity=".7"/>
+          <circle cx="14" cy="30" r="3" fill="#c9973a" opacity=".7"/><circle cx="46" cy="30" r="3" fill="#c9973a" opacity=".7"/>
+          <circle cx="18.7" cy="18.7" r="3" fill="#c9973a" opacity=".5"/><circle cx="41.3" cy="41.3" r="3" fill="#c9973a" opacity=".5"/>
+          <circle cx="41.3" cy="18.7" r="3" fill="#c9973a" opacity=".5"/><circle cx="18.7" cy="41.3" r="3" fill="#c9973a" opacity=".5"/>
+          <circle cx="30" cy="30" r="7" fill="#c9973a" opacity=".9"/>
+          <circle cx="30" cy="30" r="4" fill="#f0c040"/>
+          <circle cx="30" cy="30" r="2" fill="#3d1a08"/>
+        </svg>
+      </div>
+      <!-- SUR (bansuri) -->
+      <div class="section-illo">
+        <svg width="80" height="72" viewBox="0 0 64 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="bamV" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c8a050"/><stop offset="100%" stop-color="#7a5020"/></linearGradient><linearGradient id="bamSV" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(255,255,255,.15)"/><stop offset="40%" stop-color="rgba(255,255,255,.0)"/></linearGradient></defs>
+          <rect x="4" y="18" width="56" height="9" rx="4.5" fill="url(#bamV)" transform="rotate(-18,32,40)"/>
+          <rect x="4" y="18" width="56" height="9" rx="4.5" fill="url(#bamSV)" transform="rotate(-18,32,40)"/>
+          <rect x="8"  y="17" width="3" height="11" rx="1.5" fill="#c9973a" transform="rotate(-18,32,40)"/>
+          <rect x="52" y="17" width="3" height="11" rx="1.5" fill="#c9973a" transform="rotate(-18,32,40)"/>
+          <ellipse cx="16" cy="22" rx="3" ry="2" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <circle cx="26" cy="23" r="2.2" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <circle cx="32" cy="22" r="2.2" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <circle cx="38" cy="21" r="2.2" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <circle cx="44" cy="20" r="2.2" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <circle cx="50" cy="19" r="2.0" fill="#3d2008" transform="rotate(-18,32,40)"/>
+          <text x="42" y="14" font-size="12" fill="#f0c040" opacity=".7" font-family="serif">♪</text>
+          <text x="50" y="8"  font-size="9"  fill="#c9973a" opacity=".5" font-family="serif">♫</text>
+          <text x="34" y="10" font-size="8"  fill="#f0c040" opacity=".4" font-family="serif">♩</text>
+          <ellipse cx="28" cy="52" rx="7" ry="5" fill="#e8b090" transform="rotate(-18,28,52)"/>
+          <ellipse cx="44" cy="44" rx="7" ry="5" fill="#e8b090" transform="rotate(-18,44,44)"/>
+          <path d="M22,54 Q20,58 22,60" stroke="#c07848" stroke-width="1.2" fill="none"/>
+          <path d="M25,56 Q23,60 25,62" stroke="#c07848" stroke-width="1.2" fill="none"/>
+          <path d="M40,46 Q38,50 40,52" stroke="#c07848" stroke-width="1.2" fill="none"/>
+          <path d="M45,44 Q43,48 45,50" stroke="#c07848" stroke-width="1.2" fill="none"/>
+        </svg>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1312,12 +2173,82 @@
       <h2>Photo Gallery</h2>
       <div class="section-rule"><span>✦</span></div>
     </div>
-    <div class="gallery-upload-zone reveal" id="uploadZone">
-      <input type="file" id="galleryFileInput" accept="image/*" multiple />
-      <span class="upload-icon">🖼️</span>
-      <p>Drop photos here or <span>click to upload</span></p>
-      <p style="font-size:.8rem;margin-top:6px;opacity:.6;">Photos will appear here after the event — upload to share memories</p>
+
+    <!-- Decorative prodip flanking the upload zone -->
+    <div style="display:flex;align-items:center;gap:24px;margin-bottom:8px;">
+      <div class="section-illo reveal" style="opacity:.65;flex-shrink:0;">
+        <svg width="52" height="68" viewBox="0 0 64 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fGalL1" cx="50%" cy="75%" r="65%"><stop offset="0%" stop-color="#ffe580" stop-opacity=".95"/><stop offset="50%" stop-color="#ff8c00" stop-opacity=".7"/><stop offset="100%" stop-color="#c63a00" stop-opacity="0"/></radialGradient>
+            <radialGradient id="lBgL" cx="45%" cy="38%" r="65%"><stop offset="0%" stop-color="#e0b050"/><stop offset="60%" stop-color="#b8820a"/><stop offset="100%" stop-color="#7a4a08"/></radialGradient>
+            <radialGradient id="lRimL" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c9973a"/><stop offset="100%" stop-color="#8b5e1a"/></radialGradient>
+          </defs>
+          <!-- flame glow halo -->
+          <ellipse cx="32" cy="20" rx="16" ry="18" fill="url(#fGalL1)" style="animation:flamePulse 1.8s ease-in-out infinite"/>
+          <!-- outer flame -->
+          <path d="M32,8 C28,13 24,18 25,24 C26,29 30,31 32,31 C34,31 38,29 39,24 C40,18 36,13 32,8Z" fill="#ffe066" style="animation:flameFlicker 1.6s ease-in-out infinite;transform-origin:32px 31px;"/>
+          <!-- mid flame -->
+          <path d="M32,11 C30,15 27,19 28,23 C29,27 31,29 32,29 C33,29 35,27 36,23 C37,19 34,15 32,11Z" fill="#ff9a3c" style="animation:flameFlicker 2.1s 0.3s ease-in-out infinite;transform-origin:32px 29px;"/>
+          <!-- inner bright core -->
+          <path d="M32,14 C31,17 29.5,20 30,23 C30.5,25.5 31.5,27 32,27 C32.5,27 33.5,25.5 34,23 C34.5,20 33,17 32,14Z" fill="#fff9c0"/>
+          <!-- wick -->
+          <line x1="32" y1="31" x2="32" y2="36" stroke="#4a2a0a" stroke-width="1.8"/>
+          <!-- lamp body — with gradient depth -->
+          <path d="M18,36 Q18,31 32,31 Q46,31 46,36 L44,48 Q42,56 32,56 Q22,56 20,48 Z" fill="url(#lBgL)"/>
+          <!-- embossed rim -->
+          <path d="M18,36 Q18,31 32,31 Q46,31 46,36" fill="none" stroke="#f0c040" stroke-width="1.5"/>
+          <path d="M18.5,38 Q32,34 45.5,38" fill="none" stroke="#d4a030" stroke-width=".8" opacity=".7"/>
+          <!-- spout for wick -->
+          <path d="M44,38 Q53,36 55,30 Q53,29 49,33 Q47,35 44,38Z" fill="#c9973a"/>
+          <!-- base rim -->
+          <ellipse cx="32" cy="56" rx="14" ry="3" fill="#c9973a"/>
+          <!-- pedestal -->
+          <rect x="29" y="56" width="6" height="10" rx="2" fill="#8b5e1a"/>
+          <!-- base plate -->
+          <ellipse cx="32" cy="68" rx="16" ry="4.5" fill="url(#lRimL)"/>
+          <ellipse cx="32" cy="67" rx="14" ry="3" fill="#d4a030"/>
+          <!-- base decorative dots -->
+          <circle cx="22" cy="67" r="1.5" fill="#f0c040" opacity=".8"/>
+          <circle cx="32" cy="67" r="1.5" fill="#f0c040" opacity=".8"/>
+          <circle cx="42" cy="67" r="1.5" fill="#f0c040" opacity=".8"/>
+          <!-- floor glow -->
+          <ellipse cx="32" cy="72" rx="18" ry="3" fill="rgba(240,192,64,.15)"/>
+        </svg>
+      </div>
+      <div class="gallery-upload-zone reveal" id="uploadZone" style="flex:1;margin-bottom:0;">
+        <input type="file" id="galleryFileInput" accept="image/*" multiple />
+        <span class="upload-icon">🖼️</span>
+        <p>Drop photos here or <span>click to upload</span></p>
+        <p style="font-size:.8rem;margin-top:6px;opacity:.6;">Photos will appear here after the event — upload to share memories</p>
+      </div>
+      <div class="section-illo reveal" style="opacity:.65;flex-shrink:0;transform:scaleX(-1);">
+        <svg width="52" height="68" viewBox="0 0 64 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fGalR1" cx="50%" cy="75%" r="65%"><stop offset="0%" stop-color="#ffe580" stop-opacity=".95"/><stop offset="50%" stop-color="#ff8c00" stop-opacity=".7"/><stop offset="100%" stop-color="#c63a00" stop-opacity="0"/></radialGradient>
+            <radialGradient id="lBgR" cx="45%" cy="38%" r="65%"><stop offset="0%" stop-color="#e0b050"/><stop offset="60%" stop-color="#b8820a"/><stop offset="100%" stop-color="#7a4a08"/></radialGradient>
+            <radialGradient id="lRimR" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c9973a"/><stop offset="100%" stop-color="#8b5e1a"/></radialGradient>
+          </defs>
+          <ellipse cx="32" cy="20" rx="16" ry="18" fill="url(#fGalR1)" style="animation:flamePulse 2.1s .4s ease-in-out infinite"/>
+          <path d="M32,8 C28,13 24,18 25,24 C26,29 30,31 32,31 C34,31 38,29 39,24 C40,18 36,13 32,8Z" fill="#ffe066" style="animation:flameFlicker 1.9s .2s ease-in-out infinite;transform-origin:32px 31px;"/>
+          <path d="M32,11 C30,15 27,19 28,23 C29,27 31,29 32,29 C33,29 35,27 36,23 C37,19 34,15 32,11Z" fill="#ff9a3c" style="animation:flameFlicker 2.3s .5s ease-in-out infinite;transform-origin:32px 29px;"/>
+          <path d="M32,14 C31,17 29.5,20 30,23 C30.5,25.5 31.5,27 32,27 C32.5,27 33.5,25.5 34,23 C34.5,20 33,17 32,14Z" fill="#fff9c0"/>
+          <line x1="32" y1="31" x2="32" y2="36" stroke="#4a2a0a" stroke-width="1.8"/>
+          <path d="M18,36 Q18,31 32,31 Q46,31 46,36 L44,48 Q42,56 32,56 Q22,56 20,48 Z" fill="url(#lBgR)"/>
+          <path d="M18,36 Q18,31 32,31 Q46,31 46,36" fill="none" stroke="#f0c040" stroke-width="1.5"/>
+          <path d="M18.5,38 Q32,34 45.5,38" fill="none" stroke="#d4a030" stroke-width=".8" opacity=".7"/>
+          <path d="M44,38 Q53,36 55,30 Q53,29 49,33 Q47,35 44,38Z" fill="#c9973a"/>
+          <ellipse cx="32" cy="56" rx="14" ry="3" fill="#c9973a"/>
+          <rect x="29" y="56" width="6" height="10" rx="2" fill="#8b5e1a"/>
+          <ellipse cx="32" cy="68" rx="16" ry="4.5" fill="url(#lRimR)"/>
+          <ellipse cx="32" cy="67" rx="14" ry="3" fill="#d4a030"/>
+          <circle cx="22" cy="67" r="1.5" fill="#f0c040" opacity=".8"/>
+          <circle cx="32" cy="67" r="1.5" fill="#f0c040" opacity=".8"/>
+          <circle cx="42" cy="67" r="1.5" fill="#f0c040" opacity=".8"/>
+          <ellipse cx="32" cy="72" rx="18" ry="3" fill="rgba(240,192,64,.15)"/>
+        </svg>
+      </div>
     </div>
+
     <div class="gallery-coming-soon reveal" id="galleryComingSoon">
       <span class="cs-icon">📷</span>
       <h3>Photos Coming Soon</h3>
@@ -1341,6 +2272,107 @@
 <section id="sponsors">
   <div class="container">
     <div class="section-header reveal"><span class="section-tag">Our Supporters</span><h2>Special Thanks To</h2><div class="section-rule"><span>✦</span></div></div>
+
+    <!-- Sitar + lotus decorative accent -->
+    <div style="display:flex;justify-content:center;gap:56px;align-items:flex-end;margin-bottom:40px;" id="sponsorsIlloRow">
+      <div class="section-illo reveal">
+        <svg width="48" height="82" viewBox="0 0 52 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="sitSp" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#c8a060"/><stop offset="100%" stop-color="#6b3a10"/></radialGradient><linearGradient id="sitNSp" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8b5e1a"/><stop offset="100%" stop-color="#5c3a10"/></linearGradient></defs>
+          <ellipse cx="28" cy="6"  rx="3" ry="2" fill="#c9973a" transform="rotate(-30,28,6)"/>
+          <ellipse cx="24" cy="10" rx="3" ry="2" fill="#c9973a" transform="rotate(-30,24,10)"/>
+          <ellipse cx="20" cy="14" rx="3" ry="2" fill="#c9973a" transform="rotate(-30,20,14)"/>
+          <path d="M22,8 Q18,8 17,14 L16,54" stroke="url(#sitNSp)" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <line x1="13" y1="22" x2="21" y2="20" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="28" x2="21" y2="26" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="34" x2="21" y2="32" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="40" x2="21" y2="38" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <ellipse cx="26" cy="72" rx="20" ry="14" fill="url(#sitSp)"/>
+          <ellipse cx="26" cy="72" rx="6" ry="4" fill="#3d1a05"/>
+          <rect x="20" y="60" width="12" height="3" rx="1" fill="#8b5e1a"/>
+          <line x1="17" y1="8" x2="22" y2="62" stroke="#e8e0c8" stroke-width=".6" opacity=".7"/>
+          <line x1="18" y1="8" x2="23" y2="62" stroke="#e8e0c8" stroke-width=".5" opacity=".5"/>
+          <ellipse cx="30" cy="12" rx="8" ry="6" fill="url(#sitSp)" opacity=".8"/>
+        </svg>
+      </div>
+      <!-- ALPONA — proper rice-paste geometric design with fish-scale and interlocking curves -->
+      <div class="section-illo reveal">
+        <svg width="110" height="110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- outer ring of lotus petals — 8, each a pointed oval -->
+          <ellipse cx="50" cy="20" rx="7" ry="18" fill="rgba(139,26,46,.10)" stroke="#8b1a2e" stroke-width="1.1" opacity=".75"/>
+          <ellipse cx="50" cy="20" rx="7" ry="18" fill="rgba(139,26,46,.10)" stroke="#8b1a2e" stroke-width="1.1" opacity=".75" transform="rotate(45,50,50)"/>
+          <ellipse cx="50" cy="20" rx="7" ry="18" fill="rgba(29,92,58,.09)" stroke="#1d5c3a" stroke-width="1.1" opacity=".7" transform="rotate(90,50,50)"/>
+          <ellipse cx="50" cy="20" rx="7" ry="18" fill="rgba(29,92,58,.09)" stroke="#1d5c3a" stroke-width="1.1" opacity=".7" transform="rotate(135,50,50)"/>
+          <ellipse cx="50" cy="20" rx="7" ry="18" fill="rgba(201,151,58,.09)" stroke="#c9973a" stroke-width="1" opacity=".65" transform="rotate(180,50,50)"/>
+          <ellipse cx="50" cy="20" rx="7" ry="18" fill="rgba(201,151,58,.09)" stroke="#c9973a" stroke-width="1" opacity=".65" transform="rotate(225,50,50)"/>
+          <ellipse cx="50" cy="20" rx="7" ry="18" fill="rgba(139,26,46,.08)" stroke="#8b1a2e" stroke-width=".9" opacity=".6" transform="rotate(270,50,50)"/>
+          <ellipse cx="50" cy="20" rx="7" ry="18" fill="rgba(139,26,46,.08)" stroke="#8b1a2e" stroke-width=".9" opacity=".6" transform="rotate(315,50,50)"/>
+          <!-- inner ring of smaller petals, offset 22.5° -->
+          <ellipse cx="50" cy="30" rx="4.5" ry="12" fill="rgba(201,151,58,.10)" stroke="#c9973a" stroke-width=".85" opacity=".6" transform="rotate(22.5,50,50)"/>
+          <ellipse cx="50" cy="30" rx="4.5" ry="12" fill="rgba(139,26,46,.10)" stroke="#8b1a2e" stroke-width=".85" opacity=".6" transform="rotate(67.5,50,50)"/>
+          <ellipse cx="50" cy="30" rx="4.5" ry="12" fill="rgba(29,92,58,.09)" stroke="#1d5c3a" stroke-width=".8" opacity=".55" transform="rotate(112.5,50,50)"/>
+          <ellipse cx="50" cy="30" rx="4.5" ry="12" fill="rgba(201,151,58,.09)" stroke="#c9973a" stroke-width=".8" opacity=".55" transform="rotate(157.5,50,50)"/>
+          <ellipse cx="50" cy="30" rx="4.5" ry="12" fill="rgba(139,26,46,.09)" stroke="#8b1a2e" stroke-width=".8" opacity=".55" transform="rotate(202.5,50,50)"/>
+          <ellipse cx="50" cy="30" rx="4.5" ry="12" fill="rgba(29,92,58,.08)" stroke="#1d5c3a" stroke-width=".75" opacity=".5" transform="rotate(247.5,50,50)"/>
+          <ellipse cx="50" cy="30" rx="4.5" ry="12" fill="rgba(201,151,58,.08)" stroke="#c9973a" stroke-width=".75" opacity=".5" transform="rotate(292.5,50,50)"/>
+          <ellipse cx="50" cy="30" rx="4.5" ry="12" fill="rgba(139,26,46,.08)" stroke="#8b1a2e" stroke-width=".75" opacity=".5" transform="rotate(337.5,50,50)"/>
+          <!-- fish-scale arc band -->
+          <path d="M50,32 Q44,36 50,42 Q56,36 50,32Z" fill="rgba(201,151,58,.18)" stroke="#c9973a" stroke-width=".9" opacity=".7" transform="rotate(0,50,50)"/>
+          <path d="M50,32 Q44,36 50,42 Q56,36 50,32Z" fill="rgba(139,26,46,.15)" stroke="#8b1a2e" stroke-width=".9" opacity=".65" transform="rotate(45,50,50)"/>
+          <path d="M50,32 Q44,36 50,42 Q56,36 50,32Z" fill="rgba(29,92,58,.14)" stroke="#1d5c3a" stroke-width=".85" opacity=".6" transform="rotate(90,50,50)"/>
+          <path d="M50,32 Q44,36 50,42 Q56,36 50,32Z" fill="rgba(201,151,58,.14)" stroke="#c9973a" stroke-width=".85" opacity=".6" transform="rotate(135,50,50)"/>
+          <path d="M50,32 Q44,36 50,42 Q56,36 50,32Z" fill="rgba(139,26,46,.13)" stroke="#8b1a2e" stroke-width=".8" opacity=".55" transform="rotate(180,50,50)"/>
+          <path d="M50,32 Q44,36 50,42 Q56,36 50,32Z" fill="rgba(29,92,58,.13)" stroke="#1d5c3a" stroke-width=".8" opacity=".55" transform="rotate(225,50,50)"/>
+          <path d="M50,32 Q44,36 50,42 Q56,36 50,32Z" fill="rgba(201,151,58,.13)" stroke="#c9973a" stroke-width=".8" opacity=".55" transform="rotate(270,50,50)"/>
+          <path d="M50,32 Q44,36 50,42 Q56,36 50,32Z" fill="rgba(139,26,46,.13)" stroke="#8b1a2e" stroke-width=".8" opacity=".55" transform="rotate(315,50,50)"/>
+          <!-- concentric circles -->
+          <circle cx="50" cy="50" r="18" fill="none" stroke="#c9973a" stroke-width="1.3" opacity=".7"/>
+          <circle cx="50" cy="50" r="12" fill="none" stroke="#8b1a2e" stroke-width="1" opacity=".65"/>
+          <circle cx="50" cy="50" r="7"  fill="none" stroke="#c9973a" stroke-width=".9" opacity=".7"/>
+          <!-- rice-paste dot work on middle ring -->
+          <circle cx="50" cy="32" r="2"   fill="#c9973a" opacity=".75"/>
+          <circle cx="50" cy="68" r="2"   fill="#c9973a" opacity=".75"/>
+          <circle cx="32" cy="50" r="2"   fill="#c9973a" opacity=".75"/>
+          <circle cx="68" cy="50" r="2"   fill="#c9973a" opacity=".75"/>
+          <circle cx="37.3" cy="37.3" r="1.7" fill="#8b1a2e" opacity=".7"/>
+          <circle cx="62.7" cy="37.3" r="1.7" fill="#8b1a2e" opacity=".7"/>
+          <circle cx="37.3" cy="62.7" r="1.7" fill="#8b1a2e" opacity=".7"/>
+          <circle cx="62.7" cy="62.7" r="1.7" fill="#8b1a2e" opacity=".7"/>
+          <!-- inner dot work on inner ring -->
+          <circle cx="50" cy="38" r="1.5" fill="#c9973a" opacity=".8"/>
+          <circle cx="50" cy="62" r="1.5" fill="#c9973a" opacity=".8"/>
+          <circle cx="38" cy="50" r="1.5" fill="#c9973a" opacity=".8"/>
+          <circle cx="62" cy="50" r="1.5" fill="#c9973a" opacity=".8"/>
+          <circle cx="41.5" cy="41.5" r="1.3" fill="#1d5c3a" opacity=".65"/>
+          <circle cx="58.5" cy="41.5" r="1.3" fill="#1d5c3a" opacity=".65"/>
+          <circle cx="41.5" cy="58.5" r="1.3" fill="#1d5c3a" opacity=".65"/>
+          <circle cx="58.5" cy="58.5" r="1.3" fill="#1d5c3a" opacity=".65"/>
+          <!-- centre -->
+          <circle cx="50" cy="50" r="4" fill="#c9973a" opacity=".9"/>
+          <circle cx="50" cy="50" r="2.2" fill="#f0c040"/>
+          <circle cx="50" cy="50" r="1" fill="#c9973a"/>
+        </svg>
+      </div>
+      <div class="section-illo reveal">
+        <svg width="48" height="82" viewBox="0 0 52 88" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform:scaleX(-1);">
+          <defs><radialGradient id="sitSp2" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#c8a060"/><stop offset="100%" stop-color="#6b3a10"/></radialGradient><linearGradient id="sitNSp2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8b5e1a"/><stop offset="100%" stop-color="#5c3a10"/></linearGradient></defs>
+          <ellipse cx="28" cy="6"  rx="3" ry="2" fill="#c9973a" transform="rotate(-30,28,6)"/>
+          <ellipse cx="24" cy="10" rx="3" ry="2" fill="#c9973a" transform="rotate(-30,24,10)"/>
+          <ellipse cx="20" cy="14" rx="3" ry="2" fill="#c9973a" transform="rotate(-30,20,14)"/>
+          <path d="M22,8 Q18,8 17,14 L16,54" stroke="url(#sitNSp2)" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <line x1="13" y1="22" x2="21" y2="20" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="28" x2="21" y2="26" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="34" x2="21" y2="32" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <line x1="13" y1="40" x2="21" y2="38" stroke="#f0c040" stroke-width="1" opacity=".8"/>
+          <ellipse cx="26" cy="72" rx="20" ry="14" fill="url(#sitSp2)"/>
+          <ellipse cx="26" cy="72" rx="6" ry="4" fill="#3d1a05"/>
+          <rect x="20" y="60" width="12" height="3" rx="1" fill="#8b5e1a"/>
+          <line x1="17" y1="8" x2="22" y2="62" stroke="#e8e0c8" stroke-width=".6" opacity=".7"/>
+          <line x1="18" y1="8" x2="23" y2="62" stroke="#e8e0c8" stroke-width=".5" opacity=".5"/>
+          <ellipse cx="30" cy="12" rx="8" ry="6" fill="url(#sitSp2)" opacity=".8"/>
+        </svg>
+      </div>
+    </div>
+
     <div class="thanks-tiers">
 
       <div class="thanks-tier reveal">
@@ -1384,6 +2416,29 @@
 <section id="contact">
   <div class="container">
     <div class="section-header reveal"><span class="section-tag">Reach Us</span><h2>Contact &amp; Information</h2><div class="section-rule"><span>✦</span></div></div>
+    <!-- Decorative prodip above contact grid -->
+    <div style="display:flex;justify-content:center;margin-bottom:36px;">
+      <div class="section-illo reveal" style="opacity:.35;">
+        <svg width="56" height="72" viewBox="0 0 64 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="fGcont" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#ffe066" stop-opacity=".9"/><stop offset="100%" stop-color="#e85d04" stop-opacity="0"/></radialGradient><radialGradient id="lBcont" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#d4a843"/><stop offset="100%" stop-color="#8b5e1a"/></radialGradient></defs>
+          <ellipse cx="32" cy="24" rx="18" ry="20" fill="url(#fGcont)" opacity=".6"/>
+          <path d="M32,8 C30,12 27,16 28,20 C29,23 31,24 32,24 C33,24 35,23 36,20 C37,16 34,12 32,8Z" fill="#ffe066"/>
+          <path d="M32,10 C31,13 29,16 30,19 C31,21 32,22 32,22 C32,22 33,21 34,19 C35,16 33,13 32,10Z" fill="#ff9a3c"/>
+          <path d="M32,12 C31.5,14 30.5,17 31,19 C31.5,20.5 32,21 32,21 C32,21 32.5,20.5 33,19 C33.5,17 32.5,14 32,12Z" fill="#fff4b0"/>
+          <line x1="32" y1="24" x2="32" y2="28" stroke="#5c3a1e" stroke-width="1.5"/>
+          <path d="M20,28 Q20,24 32,24 Q44,24 44,28 L42,38 Q40,44 32,44 Q24,44 22,38 Z" fill="url(#lBcont)"/>
+          <path d="M20,28 Q20,24 32,24 Q44,24 44,28" fill="none" stroke="#f0c040" stroke-width="1.2"/>
+          <path d="M42,30 Q50,28 52,24 Q50,23 46,26 Q44,28 42,30Z" fill="#c9973a"/>
+          <rect x="29" y="44" width="6" height="14" rx="2" fill="#8b5e1a"/>
+          <rect x="28" y="43" width="8" height="3" rx="1" fill="#c9973a"/>
+          <ellipse cx="32" cy="60" rx="16" ry="5" fill="#8b5e1a"/>
+          <ellipse cx="32" cy="58" rx="14" ry="3.5" fill="#c9973a"/>
+          <circle cx="24" cy="58" r="1.5" fill="#f0c040" opacity=".7"/>
+          <circle cx="32" cy="58" r="1.5" fill="#f0c040" opacity=".7"/>
+          <circle cx="40" cy="58" r="1.5" fill="#f0c040" opacity=".7"/>
+        </svg>
+      </div>
+    </div>
     <div class="contact-grid">
       <div class="contact-info reveal-left">
         <p>Have questions about Ananda Sandhya, sponsorship, or performances? We'd love to hear from you.</p>
@@ -1393,83 +2448,214 @@
         <div class="contact-detail"><div class="contact-icon">📱</div><div class="contact-detail-text"><strong>Social Media</strong><span>Instagram: @Bap_bengalisinpgh</span></div></div>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdTuUaD4LH5mZeCvUYHgz1L-2M7KoW5yCZhTNHiJGeKEo318Q/viewform" target="_blank" class="rsvp-btn">RSVP Now →</a>
       </div>
-      <div class="reveal-right" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:32px;text-align:center;color:rgba(255,255,255,.2);font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.12em;min-height:240px;display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center;">
-        <div style="font-size:2rem;opacity:.3;">✉</div><div>RSVP / Contact Form</div>
+      <div class="reveal-right" style="border-radius:4px;overflow:hidden;border:1px solid rgba(201,151,58,.2);box-shadow:0 8px 40px rgba(0,0,0,.3);">
+        <iframe src="https://maps.google.com/maps?q=Discovery+Christian+Church,+170+Scharberry+Ln,+Mars,+PA+16046&output=embed&z=15" width="100%" height="400" frameborder="0" style="display:block;border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INSTRUMENT BAND -->
-<div class="instrument-band" id="instrBand" aria-hidden="true">
+<!-- INSTRUMENT BAND — hidden, illustrations moved inline -->
+<div class="instrument-band" id="instrBand" aria-hidden="true" style="display:none">
+
+  <!-- DHOL -->
   <div class="instr-item">
-    <svg width="60" height="50" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="30" cy="10" rx="22" ry="8" fill="none" stroke="#c9973a" stroke-width="1.2" opacity=".7"/>
-      <ellipse cx="30" cy="40" rx="22" ry="8" fill="none" stroke="#c9973a" stroke-width="1.2" opacity=".7"/>
-      <line x1="8" y1="10" x2="8" y2="40" stroke="#c9973a" stroke-width="1" opacity=".6"/>
-      <line x1="52" y1="10" x2="52" y2="40" stroke="#c9973a" stroke-width="1" opacity=".6"/>
-      <ellipse cx="30" cy="10" rx="10" ry="4" fill="rgba(122,28,46,.2)" stroke="#7a1c2e" stroke-width=".8" opacity=".7"/>
-      <ellipse cx="30" cy="40" rx="10" ry="4" fill="rgba(29,92,58,.15)" stroke="#1d5c3a" stroke-width=".8" opacity=".7"/>
+    <svg width="72" height="60" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dholBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8b3010"/><stop offset="100%" stop-color="#3d1208"/></linearGradient>
+        <radialGradient id="dholSkin" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#e8c8a0"/><stop offset="100%" stop-color="#a07840"/></radialGradient>
+      </defs>
+      <!-- drum barrel -->
+      <path d="M10,12 Q10,6 36,6 Q62,6 62,12 L62,48 Q62,54 36,54 Q10,54 10,48 Z" fill="url(#dholBody)"/>
+      <!-- decorative band in centre -->
+      <rect x="10" y="26" width="52" height="8" fill="rgba(201,151,58,.18)" stroke="#c9973a" stroke-width=".8"/>
+      <line x1="10" y1="27" x2="62" y2="27" stroke="#f0c040" stroke-width=".5" opacity=".5"/>
+      <line x1="10" y1="33" x2="62" y2="33" stroke="#f0c040" stroke-width=".5" opacity=".5"/>
+      <!-- left skin -->
+      <ellipse cx="10" cy="30" rx="6" ry="18" fill="url(#dholSkin)"/>
+      <ellipse cx="10" cy="30" rx="3.5" ry="10" fill="#2a1005" opacity=".6"/>
+      <!-- right skin -->
+      <ellipse cx="62" cy="30" rx="6" ry="18" fill="url(#dholSkin)"/>
+      <ellipse cx="62" cy="30" rx="3.5" ry="10" fill="#1a0803"/>
+      <!-- lacing ropes -->
+      <path d="M16,10 L16,50" stroke="#c9973a" stroke-width="1" opacity=".5"/>
+      <path d="M56,10 L56,50" stroke="#c9973a" stroke-width="1" opacity=".5"/>
+      <path d="M24,8  L24,52" stroke="#c9973a" stroke-width=".7" opacity=".35"/>
+      <path d="M48,8  L48,52" stroke="#c9973a" stroke-width=".7" opacity=".35"/>
+      <!-- strap -->
+      <path d="M20,6 Q36,2 52,6" stroke="#8b5e1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
     </svg>
     <span class="instr-label">Dhol</span>
   </div>
+
+  <!-- HARMONIUM -->
   <div class="instr-item">
-    <svg width="70" height="50" viewBox="0 0 70 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="5" y="8" width="60" height="34" rx="3" fill="rgba(78,15,28,.2)" stroke="#c9973a" stroke-width="1.2" opacity=".7"/>
-      <rect x="8" y="28" width="54" height="10" rx="1" fill="rgba(255,255,255,.07)" stroke="#c9973a" stroke-width=".8" opacity=".6"/>
-      <rect x="10" y="29" width="5" height="8" rx="1" fill="rgba(255,255,255,.15)" stroke="#c9973a" stroke-width=".5" opacity=".5"/>
-      <rect x="17" y="29" width="5" height="8" rx="1" fill="rgba(255,255,255,.15)" stroke="#c9973a" stroke-width=".5" opacity=".5"/>
-      <rect x="24" y="29" width="5" height="8" rx="1" fill="rgba(255,255,255,.15)" stroke="#c9973a" stroke-width=".5" opacity=".5"/>
-      <rect x="31" y="29" width="5" height="8" rx="1" fill="rgba(255,255,255,.15)" stroke="#c9973a" stroke-width=".5" opacity=".5"/>
-      <rect x="38" y="29" width="5" height="8" rx="1" fill="rgba(255,255,255,.15)" stroke="#c9973a" stroke-width=".5" opacity=".5"/>
-      <rect x="45" y="29" width="5" height="8" rx="1" fill="rgba(255,255,255,.15)" stroke="#c9973a" stroke-width=".5" opacity=".5"/>
-      <rect x="52" y="29" width="5" height="8" rx="1" fill="rgba(255,255,255,.15)" stroke="#c9973a" stroke-width=".5" opacity=".5"/>
+    <svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="harmBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5c3010"/><stop offset="100%" stop-color="#2a1005"/></linearGradient>
+      </defs>
+      <!-- bellows / body -->
+      <rect x="4" y="10" width="72" height="44" rx="4" fill="url(#harmBody)" stroke="#c9973a" stroke-width="1.2"/>
+      <!-- bellows pleats on sides -->
+      <rect x="4"  y="10" width="10" height="44" rx="2" fill="#3d1a08" stroke="#c9973a" stroke-width=".8"/>
+      <line x1="9"  y1="14" x2="9"  y2="50" stroke="#f0c040" stroke-width=".6" opacity=".4"/>
+      <line x1="7"  y1="20" x2="14" y2="20" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+      <line x1="7"  y1="28" x2="14" y2="28" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+      <line x1="7"  y1="36" x2="14" y2="36" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+      <line x1="7"  y1="44" x2="14" y2="44" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+      <rect x="66" y="10" width="10" height="44" rx="2" fill="#3d1a08" stroke="#c9973a" stroke-width=".8"/>
+      <line x1="71" y1="14" x2="71" y2="50" stroke="#f0c040" stroke-width=".6" opacity=".4"/>
+      <line x1="66" y1="20" x2="76" y2="20" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+      <line x1="66" y1="28" x2="76" y2="28" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+      <line x1="66" y1="36" x2="76" y2="36" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+      <line x1="66" y1="44" x2="76" y2="44" stroke="#f0c040" stroke-width=".4" opacity=".3"/>
+      <!-- top grille -->
+      <rect x="14" y="10" width="52" height="14" rx="2" fill="#2a1005" stroke="#c9973a" stroke-width=".8"/>
+      <line x1="20" y1="10" x2="20" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+      <line x1="28" y1="10" x2="28" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+      <line x1="36" y1="10" x2="36" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+      <line x1="44" y1="10" x2="44" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+      <line x1="52" y1="10" x2="52" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+      <line x1="60" y1="10" x2="60" y2="24" stroke="#c9973a" stroke-width=".5" opacity=".4"/>
+      <!-- white keys -->
+      <rect x="15" y="34" width="50" height="16" rx="2" fill="#f5f0e8" stroke="#c9973a" stroke-width=".6"/>
+      <line x1="22" y1="34" x2="22" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+      <line x1="29" y1="34" x2="29" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+      <line x1="36" y1="34" x2="36" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+      <line x1="43" y1="34" x2="43" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+      <line x1="50" y1="34" x2="50" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+      <line x1="57" y1="34" x2="57" y2="50" stroke="#c9973a" stroke-width=".6" opacity=".4"/>
+      <!-- black keys -->
+      <rect x="18" y="34" width="5" height="10" rx="1" fill="#1a0803"/>
+      <rect x="25" y="34" width="5" height="10" rx="1" fill="#1a0803"/>
+      <rect x="39" y="34" width="5" height="10" rx="1" fill="#1a0803"/>
+      <rect x="46" y="34" width="5" height="10" rx="1" fill="#1a0803"/>
+      <rect x="53" y="34" width="5" height="10" rx="1" fill="#1a0803"/>
     </svg>
     <span class="instr-label">Harmonium</span>
   </div>
+
+  <!-- GOLD STAR DIVIDER -->
   <div class="instr-item">
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="20" y1="4" x2="20" y2="36" stroke="#c9973a" stroke-width="1.5" opacity=".6"/>
-      <line x1="4" y1="20" x2="36" y2="20" stroke="#c9973a" stroke-width="1.5" opacity=".6"/>
-      <line x1="8" y1="8" x2="32" y2="32" stroke="#c9973a" stroke-width="1.5" opacity=".6"/>
-      <line x1="32" y1="8" x2="8" y2="32" stroke="#c9973a" stroke-width="1.5" opacity=".6"/>
-      <circle cx="20" cy="20" r="5" fill="none" stroke="#c9973a" stroke-width="1" opacity=".6"/>
-      <circle cx="20" cy="20" r="2" fill="#c9973a" opacity=".5"/>
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="starGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f0c040" stop-opacity=".6"/><stop offset="100%" stop-color="#c9973a" stop-opacity="0"/></radialGradient></defs>
+      <circle cx="22" cy="22" r="20" fill="url(#starGlow)"/>
+      <path d="M22,4 L24.6,14.6 L35.6,11.4 L28.4,20 L38,25.2 L27,26.2 L26.8,38 L22,28.4 L17.2,38 L17,26.2 L6,25.2 L15.6,20 L8.4,11.4 L19.4,14.6 Z" fill="#f0c040" opacity=".85"/>
+      <path d="M22,4 L24.6,14.6 L35.6,11.4 L28.4,20 L38,25.2 L27,26.2 L26.8,38 L22,28.4 L17.2,38 L17,26.2 L6,25.2 L15.6,20 L8.4,11.4 L19.4,14.6 Z" fill="none" stroke="#fff8d0" stroke-width=".8" opacity=".5"/>
+      <circle cx="22" cy="22" r="4" fill="#c9973a"/>
+      <circle cx="22" cy="22" r="2" fill="#f0c040"/>
     </svg>
-    <span class="instr-label" style="opacity:.4;">✦</span>
+    <span class="instr-label" style="color:rgba(201,151,58,.6);">✦</span>
   </div>
+
+  <!-- ESRAJ / VEENA -->
   <div class="instr-item">
-    <svg width="52" height="56" viewBox="0 0 52 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="26" cy="44" rx="18" ry="12" fill="rgba(122,28,46,.1)" stroke="#c9973a" stroke-width="1.2" opacity=".7"/>
-      <ellipse cx="26" cy="12" rx="10" ry="7" fill="rgba(122,28,46,.08)" stroke="#c9973a" stroke-width="1" opacity=".6"/>
-      <rect x="23" y="8" width="6" height="36" rx="3" fill="none" stroke="#7a1c2e" stroke-width="1" opacity=".6"/>
-      <line x1="26" y1="8" x2="26" y2="52" stroke="#e8c070" stroke-width=".5" opacity=".5"/>
-      <circle cx="26" cy="44" r="5" fill="none" stroke="#c9973a" stroke-width=".8" opacity=".5"/>
+    <svg width="56" height="72" viewBox="0 0 56 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="veenaBody" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#c8a060"/><stop offset="100%" stop-color="#6b3a10"/></radialGradient>
+        <radialGradient id="veenaBody2" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#b89050"/><stop offset="100%" stop-color="#5c3010"/></radialGradient>
+      </defs>
+      <!-- tuning pegs -->
+      <ellipse cx="34" cy="6"  rx="4" ry="2.5" fill="#c9973a" transform="rotate(20,34,6)"/>
+      <ellipse cx="38" cy="12" rx="4" ry="2.5" fill="#c9973a" transform="rotate(20,38,12)"/>
+      <!-- neck -->
+      <rect x="24" y="6" width="8" height="40" rx="4" fill="#7a5020"/>
+      <rect x="25" y="6" width="3" height="40" rx="1.5" fill="#9a6830" opacity=".6"/>
+      <!-- frets -->
+      <line x1="23" y1="14" x2="33" y2="14" stroke="#f0c040" stroke-width=".9" opacity=".8"/>
+      <line x1="23" y1="20" x2="33" y2="20" stroke="#f0c040" stroke-width=".9" opacity=".8"/>
+      <line x1="23" y1="26" x2="33" y2="26" stroke="#f0c040" stroke-width=".9" opacity=".8"/>
+      <line x1="23" y1="32" x2="33" y2="32" stroke="#f0c040" stroke-width=".9" opacity=".8"/>
+      <line x1="23" y1="38" x2="33" y2="38" stroke="#f0c040" stroke-width=".9" opacity=".8"/>
+      <!-- upper small gourd -->
+      <ellipse cx="20" cy="16" rx="10" ry="8" fill="url(#veenaBody2)"/>
+      <ellipse cx="17" cy="13" rx="3" ry="2.5" fill="rgba(255,255,255,.12)"/>
+      <!-- lower large gourd -->
+      <ellipse cx="28" cy="58" rx="22" ry="14" fill="url(#veenaBody)"/>
+      <ellipse cx="22" cy="53" rx="7" ry="5" fill="rgba(255,255,255,.1)"/>
+      <!-- soundhole -->
+      <ellipse cx="28" cy="58" rx="7" ry="5" fill="#3d1a05"/>
+      <ellipse cx="28" cy="58" rx="4" ry="3" fill="#2a1008"/>
+      <!-- bridge -->
+      <rect x="22" y="47" width="12" height="3" rx="1" fill="#8b5e1a"/>
+      <!-- strings -->
+      <line x1="26" y1="6"  x2="26" y2="50" stroke="#e8e0c8" stroke-width=".6" opacity=".7"/>
+      <line x1="28" y1="6"  x2="28" y2="50" stroke="#e8e0c8" stroke-width=".5" opacity=".5"/>
+      <line x1="30" y1="6"  x2="30" y2="50" stroke="#e8e0c8" stroke-width=".5" opacity=".5"/>
     </svg>
     <span class="instr-label">Veena</span>
   </div>
+
+  <!-- FILM REEL -->
   <div class="instr-item">
-    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="26" cy="26" r="23" fill="none" stroke="#c9973a" stroke-width="1.2" opacity=".7"/>
-      <circle cx="26" cy="26" r="16" fill="none" stroke="#c9973a" stroke-width=".9" opacity=".6"/>
-      <circle cx="26" cy="26" r="8" fill="rgba(122,28,46,.15)" stroke="#c9973a" stroke-width=".8" opacity=".6"/>
-      <circle cx="26" cy="26" r="3" fill="#c9973a" opacity=".4"/>
-      <line x1="26" y1="3" x2="26" y2="49" stroke="#c9973a" stroke-width=".8" opacity=".5"/>
-      <line x1="3" y1="26" x2="49" y2="26" stroke="#c9973a" stroke-width=".8" opacity=".5"/>
-      <line x1="9.5" y1="9.5" x2="42.5" y2="42.5" stroke="#c9973a" stroke-width=".8" opacity=".5"/>
-      <line x1="42.5" y1="9.5" x2="9.5" y2="42.5" stroke="#c9973a" stroke-width=".8" opacity=".5"/>
+    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="reelGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#3d1a08"/><stop offset="100%" stop-color="#1a0803"/></radialGradient>
+      </defs>
+      <!-- outer reel ring -->
+      <circle cx="30" cy="30" r="27" fill="url(#reelGrad)" stroke="#c9973a" stroke-width="1.5"/>
+      <!-- spokes -->
+      <line x1="30" y1="6"  x2="30" y2="54" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+      <line x1="6"  y1="30" x2="54" y2="30" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+      <line x1="11" y1="11" x2="49" y2="49" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+      <line x1="49" y1="11" x2="11" y2="49" stroke="#c9973a" stroke-width="1" opacity=".6"/>
+      <!-- inner hub ring -->
+      <circle cx="30" cy="30" r="16" fill="#2a1005" stroke="#f0c040" stroke-width="1.2"/>
+      <!-- film perfs around inner ring -->
+      <circle cx="30" cy="14" r="3" fill="#c9973a" opacity=".7"/>
+      <circle cx="30" cy="46" r="3" fill="#c9973a" opacity=".7"/>
+      <circle cx="14" cy="30" r="3" fill="#c9973a" opacity=".7"/>
+      <circle cx="46" cy="30" r="3" fill="#c9973a" opacity=".7"/>
+      <circle cx="18.7" cy="18.7" r="3" fill="#c9973a" opacity=".5"/>
+      <circle cx="41.3" cy="41.3" r="3" fill="#c9973a" opacity=".5"/>
+      <circle cx="41.3" cy="18.7" r="3" fill="#c9973a" opacity=".5"/>
+      <circle cx="18.7" cy="41.3" r="3" fill="#c9973a" opacity=".5"/>
+      <!-- centre hub -->
+      <circle cx="30" cy="30" r="7" fill="#c9973a" opacity=".9"/>
+      <circle cx="30" cy="30" r="4" fill="#f0c040"/>
+      <circle cx="30" cy="30" r="2" fill="#3d1a08"/>
     </svg>
     <span class="instr-label">Film Reel</span>
   </div>
+
+  <!-- MANCHA (stage curtains) -->
   <div class="instr-item">
-    <svg width="56" height="52" viewBox="0 0 56 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4,4 C10,6 14,14 10,26 C8,34 6,40 10,50 L4,50 Z" fill="rgba(122,28,46,.2)" stroke="#7a1c2e" stroke-width="1.2" opacity=".7"/>
-      <path d="M52,4 C46,6 42,14 46,26 C48,34 50,40 46,50 L52,50 Z" fill="rgba(122,28,46,.2)" stroke="#7a1c2e" stroke-width="1.2" opacity=".7"/>
-      <path d="M4,4 Q14,12 28,8 Q42,12 52,4" fill="rgba(122,28,46,.15)" stroke="#7a1c2e" stroke-width="1.2" opacity=".7"/>
-      <line x1="4" y1="50" x2="52" y2="50" stroke="#c9973a" stroke-width="1" opacity=".5"/>
+    <svg width="72" height="60" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="curtainL" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5c0f1c"/><stop offset="100%" stop-color="#8b1a2e"/></linearGradient>
+        <linearGradient id="curtainR" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8b1a2e"/><stop offset="100%" stop-color="#5c0f1c"/></linearGradient>
+      </defs>
+      <!-- curtain rod -->
+      <rect x="2" y="4" width="68" height="4" rx="2" fill="#8b5e1a"/>
+      <circle cx="4"  cy="6" r="3" fill="#c9973a"/>
+      <circle cx="68" cy="6" r="3" fill="#c9973a"/>
+      <circle cx="36" cy="6" r="2" fill="#c9973a"/>
+      <!-- left curtain -->
+      <path d="M4,8 C8,10 16,8 20,14 C24,20 22,34 18,44 C14,52 8,56 4,56 Z" fill="url(#curtainL)"/>
+      <path d="M4,8 C6,12 10,18 8,28 C6,38 4,46 4,56" stroke="#f0c040" stroke-width=".8" fill="none" opacity=".4"/>
+      <path d="M20,14 C18,22 16,32 18,42" stroke="#f0c040" stroke-width=".6" fill="none" opacity=".3"/>
+      <!-- gold tassel left -->
+      <path d="M18,44 Q14,52 10,56 Q16,54 18,44" fill="#c9973a" opacity=".8"/>
+      <line x1="12" y1="52" x2="10" y2="58" stroke="#f0c040" stroke-width="1"/>
+      <line x1="14" y1="54" x2="13" y2="60" stroke="#f0c040" stroke-width="1"/>
+      <line x1="16" y1="55" x2="16" y2="60" stroke="#f0c040" stroke-width="1"/>
+      <!-- right curtain -->
+      <path d="M68,8 C64,10 56,8 52,14 C48,20 50,34 54,44 C58,52 64,56 68,56 Z" fill="url(#curtainR)"/>
+      <path d="M68,8 C66,12 62,18 64,28 C66,38 68,46 68,56" stroke="#f0c040" stroke-width=".8" fill="none" opacity=".4"/>
+      <path d="M52,14 C54,22 56,32 54,42" stroke="#f0c040" stroke-width=".6" fill="none" opacity=".3"/>
+      <!-- gold tassel right -->
+      <path d="M54,44 Q58,52 62,56 Q56,54 54,44" fill="#c9973a" opacity=".8"/>
+      <line x1="60" y1="52" x2="62" y2="58" stroke="#f0c040" stroke-width="1"/>
+      <line x1="58" y1="54" x2="59" y2="60" stroke="#f0c040" stroke-width="1"/>
+      <line x1="56" y1="55" x2="56" y2="60" stroke="#f0c040" stroke-width="1"/>
+      <!-- stage floor glow -->
+      <ellipse cx="36" cy="56" rx="24" ry="4" fill="rgba(201,151,58,.15)"/>
+      <!-- spotlight beam -->
+      <path d="M36,8 L20,56 L52,56 Z" fill="rgba(255,240,180,.04)"/>
     </svg>
     <span class="instr-label">Mancha</span>
   </div>
+
 </div>
 
 <footer>
@@ -1575,6 +2761,10 @@ buildFilmStrip('filmStrip2');
 // DECO ICONS
 const decoObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.querySelectorAll('.deco-icon').forEach((el,i)=>{setTimeout(()=>el.classList.add('visible'),i*120);});entry.target.querySelectorAll('.instr-item').forEach((el,i)=>{setTimeout(()=>el.classList.add('visible'),i*100);});decoObserver.unobserve(entry.target);}});},{threshold:0.1});
 document.querySelectorAll('#aboutDecoRow,#instrBand').forEach(el=>decoObserver.observe(el));
+
+// ILLO ROW REVEAL
+const illoObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.querySelectorAll('.section-illo').forEach((el,i)=>{setTimeout(()=>el.classList.add('visible'),i*110);});illoObserver.unobserve(entry.target);}});},{threshold:0.1});
+document.querySelectorAll('.illo-row,.program-illo-strip,#sponsorsIlloRow').forEach(el=>illoObserver.observe(el));
 
 // GALLERY
 const uploadZone=document.getElementById('uploadZone'),fileInput=document.getElementById('galleryFileInput');
