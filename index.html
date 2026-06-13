@@ -2815,8 +2815,19 @@ function toggleExpand(btn) {
     if (!c.dataset.cardId) c.dataset.cardId = String(i);
   });
 
-  // ✅ NEW: snapshot ALL grid children in their current order BEFORE touching anything
+  // ✅ snapshot ALL grid children in their current order BEFORE touching anything
   grid._savedChildren = Array.from(grid.children);
+
+  // ✅ On small screens, lock every card's current rendered size before we
+  //    switch the grid to flex-column layout, so collapsing back restores
+  //    the exact same card dimensions without a reflow/resize jump.
+  if (window.innerWidth <= 768) {
+    grid.querySelectorAll('.video-card').forEach(function(c) {
+      var rect = c.getBoundingClientRect();
+      c.style.width    = rect.width  + 'px';
+      c.style.minWidth = rect.width  + 'px';
+    });
+  }
 
   var cardId    = card.dataset.cardId;
   var thumbEl   = card.querySelector('.video-thumb');
@@ -2877,13 +2888,27 @@ function collapseHero(grid, heroEl) {
   }
 
   var origCard = grid.querySelector('.video-card[data-card-id="' + cardId + '"]');
-  if (origCard) origCard.style.display = '';
+  if (origCard) {
+    origCard.style.display = '';
+    // Clear any locked dimensions set before expanding
+    origCard.style.width = '';
+    origCard.style.height = '';
+    origCard.style.minWidth = '';
+    origCard.style.minHeight = '';
+  }
   heroEl.remove();
 
-  // ✅ NEW: replay every card in its original saved order so grid layout is identical
+  // ✅ replay every card in its original saved order so grid layout is identical
   var saved = grid._savedChildren;
   if (saved && saved.length) {
-    saved.forEach(function(el) { grid.appendChild(el); });
+    saved.forEach(function(el) {
+      // Clear any locked dimensions on all cards
+      el.style.width = '';
+      el.style.height = '';
+      el.style.minWidth = '';
+      el.style.minHeight = '';
+      grid.appendChild(el);
+    });
     grid._savedChildren = null;
   }
   grid.classList.remove('has-hero');
