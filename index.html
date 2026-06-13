@@ -2772,6 +2772,8 @@ Everyone rises up in rebellion against the tyrant king and smashes his statue to
       var existingHero = btn.closest('.video-expanded-hero');
       if (!existingHero) existingHero = grid.querySelector('.video-expanded-hero');
 
+      var scrollY = window.scrollY;
+
       if (btn.closest('.video-expanded-hero')) {
         collapseHero(grid, existingHero);
         return;
@@ -2833,6 +2835,8 @@ Everyone rises up in rebellion against the tyrant king and smashes his statue to
       card.style.display = 'none';
       grid.appendChild(heroEl);
       grid.appendChild(restRow);
+
+    window.scrollTo({ top: scrollY, behavior: 'instant' });
     }
 
     function collapseHero(grid, heroEl) {
