@@ -2764,109 +2764,102 @@ Everyone rises up in rebellion against the tyrant king and smashes his statue to
   <a href="#hero" class="scroll-top" id="scrollTop" aria-label="Back to top">↑</a>
 
   <script>
-    // VIDEO CARD EXPAND / LANGUAGE TOGGLE
-    function toggleExpand(btn) {
-      var grid = btn.closest('.video-grid');
+// VIDEO CARD EXPAND / LANGUAGE TOGGLE
+function toggleExpand(btn) {
+  var grid = btn.closest('.video-grid');
+  var existingHero = btn.closest('.video-expanded-hero');
+  if (!existingHero) existingHero = grid.querySelector('.video-expanded-hero');
+  var scrollY = window.scrollY;
 
-      // If button is inside the expanded hero, collapse it
-      var existingHero = btn.closest('.video-expanded-hero');
-      if (!existingHero) existingHero = grid.querySelector('.video-expanded-hero');
-
-      var scrollY = window.scrollY;
-
-      if (btn.closest('.video-expanded-hero')) {
-        collapseHero(grid, existingHero);
-        return;
-      }
-
-      // Collapse any open hero first
-      if (existingHero) collapseHero(grid, existingHero);
-
-      // Expand the clicked card
-      var card = btn.closest('.video-card');
-
-      // Assign stable IDs if not already set
-      grid.querySelectorAll('.video-card').forEach(function(c, i) {
-        if (!c.dataset.cardId) c.dataset.cardId = String(i);
-      });
-
-     grid._savedCardOrder = Array.from(grid.querySelectorAll('.video-card'));
-
-
-      var cardId    = card.dataset.cardId;
-      var thumbEl   = card.querySelector('.video-thumb');
-      var infoEl    = card.querySelector('.video-info');
-      var h3Text    = infoEl.querySelector('h3').textContent;
-      var tagline   = infoEl.querySelector('p').textContent;
-      var detailsEl = infoEl.querySelector('.video-details-inner');
-      var videoEl   = thumbEl.querySelector('video');
-      var videoSrc  = videoEl.querySelector('source').getAttribute('src');
-      var poster    = videoEl.getAttribute('poster') || '';
-
-      // Build hero
-      var heroEl = document.createElement('div');
-      heroEl.className = 'video-expanded-hero';
-      heroEl.dataset.srcCard = cardId;
-      heroEl.innerHTML =
-        '<div class="hero-thumb">' +
-          '<video controls preload="metadata"' + (poster ? ' poster="' + poster + '"' : '') + ' style="width:100%;height:100%;object-fit:cover;display:block;">' +
-            '<source src="' + videoSrc + '" type="video/mp4">' +
-          '</video>' +
-        '</div>' +
-        '<div class="hero-info">' +
-          '<h3>' + h3Text + '</h3>' +
-          '<p class="hero-tagline">' + tagline + '</p>' +
-          '<button class="video-expand-btn open" onclick="toggleExpand(this)" type="button">' +
-            '<span>Hide</span><span class="expand-chevron" style="transform:rotate(180deg)">▾</span>' +
-          '</button>' +
-          '<div class="video-details-inner-placeholder"></div>' +
-        '</div>';
-
-      // Inject cloned details
-      if (detailsEl) {
-        var placeholder = heroEl.querySelector('.video-details-inner-placeholder');
-        placeholder.replaceWith(detailsEl.cloneNode(true));
-      }
-
-      // Move other cards into rest-row
-      var restRow = document.createElement('div');
-      restRow.className = 'video-rest-row';
-      grid.querySelectorAll('.video-card').forEach(function(c) {
-        if (c.dataset.cardId !== cardId) restRow.appendChild(c);
-      });
-
-      card.style.display = 'none';
-      grid.appendChild(heroEl);
-      grid.appendChild(restRow);
-
+  // Collapsing
+  if (btn.closest('.video-expanded-hero')) {
+    collapseHero(grid, existingHero);
     window.scrollTo({ top: scrollY, behavior: 'instant' });
-    }
+    return;
+  }
 
-    function collapseHero(grid, heroEl) {
-      var cardId  = heroEl.dataset.srcCard;
-      var restRow = grid.querySelector('.video-rest-row');
-      if (restRow) {
-        Array.from(restRow.children).forEach(function(c) { grid.appendChild(c); });
-        restRow.remove();
-      }
-      var origCard = grid.querySelector('.video-card[data-card-id="' + cardId + '"]');
-      if (origCard) origCard.style.display = '';
-      heroEl.remove();
+  if (existingHero) collapseHero(grid, existingHero);
 
-      var saved = grid._savedCardOrder;
-      if (saved && saved.length) {
-        saved.forEach(function(c) { grid.appendChild(c); });
-        grid._savedCardOrder = null;
-      }
-    }
+  var card = btn.closest('.video-card');
+  grid.querySelectorAll('.video-card').forEach(function(c, i) {
+    if (!c.dataset.cardId) c.dataset.cardId = String(i);
+  });
 
-    function switchLang(btn, lang) {
-      var detailRow = btn.closest('.detail-row');
-      detailRow.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      detailRow.querySelector('.synopsis-en').classList.toggle('active', lang === 'en');
-      detailRow.querySelector('.synopsis-bn').classList.toggle('active', lang === 'bn');
-    }
+  // ✅ NEW: snapshot ALL grid children in their current order BEFORE touching anything
+  grid._savedChildren = Array.from(grid.children);
+
+  var cardId    = card.dataset.cardId;
+  var thumbEl   = card.querySelector('.video-thumb');
+  var infoEl    = card.querySelector('.video-info');
+  var h3Text    = infoEl.querySelector('h3').textContent;
+  var tagline   = infoEl.querySelector('p').textContent;
+  var detailsEl = infoEl.querySelector('.video-details-inner');
+  var videoEl   = thumbEl.querySelector('video');
+  var videoSrc  = videoEl.querySelector('source').getAttribute('src');
+  var poster    = videoEl.getAttribute('poster') || '';
+
+  var heroEl = document.createElement('div');
+  heroEl.className = 'video-expanded-hero';
+  heroEl.dataset.srcCard = cardId;
+  heroEl.innerHTML =
+    '<div class="hero-thumb">' +
+      '<video controls preload="metadata"' + (poster ? ' poster="' + poster + '"' : '') + ' style="width:100%;height:100%;object-fit:cover;display:block;">' +
+        '<source src="' + videoSrc + '" type="video/mp4">' +
+      '</video>' +
+    '</div>' +
+    '<div class="hero-info">' +
+      '<h3>' + h3Text + '</h3>' +
+      '<p class="hero-tagline">' + tagline + '</p>' +
+      '<button class="video-expand-btn open" onclick="toggleExpand(this)" type="button">' +
+        '<span>Hide</span><span class="expand-chevron" style="transform:rotate(180deg)">▾</span>' +
+      '</button>' +
+      '<div class="video-details-inner-placeholder"></div>' +
+    '</div>';
+
+  if (detailsEl) {
+    heroEl.querySelector('.video-details-inner-placeholder').replaceWith(detailsEl.cloneNode(true));
+  }
+
+  var restRow = document.createElement('div');
+  restRow.className = 'video-rest-row';
+  grid.querySelectorAll('.video-card').forEach(function(c) {
+    if (c.dataset.cardId !== cardId) restRow.appendChild(c);
+  });
+  card.style.display = 'none';
+  grid.appendChild(heroEl);
+  grid.appendChild(restRow);
+  window.scrollTo({ top: scrollY, behavior: 'instant' });
+}
+
+function collapseHero(grid, heroEl) {
+  var cardId  = heroEl.dataset.srcCard;
+  var restRow = grid.querySelector('.video-rest-row');
+
+  // Put restRow cards back into grid
+  if (restRow) {
+    Array.from(restRow.children).forEach(function(c) { grid.appendChild(c); });
+    restRow.remove();
+  }
+
+  var origCard = grid.querySelector('.video-card[data-card-id="' + cardId + '"]');
+  if (origCard) origCard.style.display = '';
+  heroEl.remove();
+
+  // ✅ NEW: replay every card in its original saved order so grid layout is identical
+  var saved = grid._savedChildren;
+  if (saved && saved.length) {
+    saved.forEach(function(el) { grid.appendChild(el); });
+    grid._savedChildren = null;
+  }
+}
+
+function switchLang(btn, lang) {
+  var detailRow = btn.closest('.detail-row');
+  detailRow.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  detailRow.querySelector('.synopsis-en').classList.toggle('active', lang === 'en');
+  detailRow.querySelector('.synopsis-bn').classList.toggle('active', lang === 'bn');
+}
 
     // CURSOR (desktop only)
     if(window.innerWidth > 600) {
